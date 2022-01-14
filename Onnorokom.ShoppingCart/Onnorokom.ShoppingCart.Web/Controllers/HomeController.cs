@@ -22,7 +22,5 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
         {
             return View();
         }
-
-       
     }
 }
