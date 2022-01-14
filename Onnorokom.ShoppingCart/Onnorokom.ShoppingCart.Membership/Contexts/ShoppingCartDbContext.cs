@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Onnorokom.ShoppingCart.Membership.Entities;
-using Onnorokom.ShoppingCart.Membership.Seeds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +8,16 @@ using System.Threading.Tasks;
 
 namespace Onnorokom.ShoppingCart.Membership.Contexts
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Role, Guid, UserClaim,
-       UserRole, UserLogin, RoleClaim, UserToken>, IApplicationDbContext
+    public class ShoppingCartDbContext : DbContext, IShoppingCartDbContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssemblyName;
 
-        public ApplicationDbContext(string connectionString, string migrationAssemblyName)
+        public ShoppingCartDbContext(string connectionString, string migrationAssemblyName)
         {
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
         }
-
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             if (!dbContextOptionsBuilder.IsConfigured)
@@ -40,13 +30,7 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
             base.OnConfiguring(dbContextOptionsBuilder);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Role>()
-               .HasData(DataSeed.Roles);
-
-            base.OnModelCreating(modelBuilder);
-        }
-
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Onnorokom.ShoppingCart.Membership.Contexts;
+using Onnorokom.ShoppingCart.Membership.Repositories;
+using Onnorokom.ShoppingCart.Membership.Services;
+using Onnorokom.ShoppingCart.Membership.UnitOfWorks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +32,25 @@ namespace Onnorokom.ShoppingCart.Membership
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
                 .WithParameter("connectionString", _connectionString)
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ShoppingCartDbContext>().AsSelf()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ShoppingCartDbContext>().As<IShoppingCartDbContext>()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<ShoppingCartUnitOfWork>().As<IShoppingCartUnitOfWork>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

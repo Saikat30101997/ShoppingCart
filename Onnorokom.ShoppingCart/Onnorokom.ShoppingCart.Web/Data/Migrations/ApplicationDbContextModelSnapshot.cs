@@ -91,6 +91,53 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -121,15 +168,15 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bf5d7a2b-fc20-4f79-bd41-1c42aaa8c509"),
-                            ConcurrencyStamp = "f8aaef9e-b63b-4ad0-a562-1a5461e126ce",
+                            Id = new Guid("440c1b6d-db41-4efa-9b86-d28e1562d33c"),
+                            ConcurrencyStamp = "7b93978e-fe46-4453-b7a1-9ee3f44f7430",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("16b844ad-4c07-46b0-bfae-343f0f0bd397"),
-                            ConcurrencyStamp = "e9285ea0-3ecf-472b-ac01-9e662b8b9a65",
+                            Id = new Guid("e02aa04e-b5f6-4ba0-b1a5-afb3a5e5cd70"),
+                            ConcurrencyStamp = "1be04a0f-f206-4f68-ad39-005927570b79",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -236,6 +283,17 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Product", b =>
+                {
+                    b.HasOne("Onnorokom.ShoppingCart.Membership.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.RoleClaim", b =>
                 {
                     b.HasOne("Onnorokom.ShoppingCart.Membership.Entities.Role", null)
@@ -285,6 +343,11 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -70,6 +70,10 @@ namespace Onnorokom.ShoppingCart.Web
                         options.UseSqlServer(connectionInfo.connectionString, b =>
                         b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
+            services.AddDbContext<ShoppingCartDbContext>(options =>
+                        options.UseSqlServer(connectionInfo.connectionString, b =>
+                        b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
+
             services
                 .AddIdentity<ApplicationUser, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
