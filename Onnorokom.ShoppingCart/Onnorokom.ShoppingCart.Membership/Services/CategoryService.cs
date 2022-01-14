@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Onnorokom.ShoppingCart.Membership.BusinessObjects;
 using Onnorokom.ShoppingCart.Membership.UnitOfWorks;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,15 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             _mapper = mapper;
         }
 
+        public void CreateCategory(Category category)
+        {
+            if (category == null)
+                throw new InvalidOperationException("Category must be provided");
+
+            _shoppingCartUnitOfWork.Categories.Add(
+                _mapper.Map<Entities.Category>(category));
+
+            _shoppingCartUnitOfWork.Save();
+        }
     }
 }

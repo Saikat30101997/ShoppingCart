@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories;
 using Onnorokom.ShoppingCart.Web.Models.Account;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<ConfirmEmailModel>().AsSelf();
             builder.RegisterType<ForgotPasswordModel>().AsSelf();
             builder.RegisterType<ResetPasswordModel>().AsSelf();
+            builder.RegisterType<CreateCategoryModel>().AsSelf();
 
             base.Load(builder);
         }

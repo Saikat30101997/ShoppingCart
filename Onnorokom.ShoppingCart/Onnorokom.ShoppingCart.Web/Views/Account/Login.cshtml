@@ -10,7 +10,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <input type="hidden" asp-for="ReturnUrl" />
         <div class="input-group mb-3">
-            <input type="email" asp-for="Email" class="form-control" placeholder="Email">
+            <input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope"></span>
@@ -21,13 +21,13 @@
             </div>
         </div>
         <div class="input-group mb-3">
-            <input type="password" asp-for="Password" class="form-control" placeholder="Password">
+            <input type="password" asp-for="Password" class="form-control" placeholder="Password" required>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-lock"></span>
                 </div>
             </div>
-            <div id="validationpassword" class="invalid-feedback">
+            <div class="invalid-feedback">
                 Please enter a password.
             </div>
         </div>
