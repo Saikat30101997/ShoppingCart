@@ -1,0 +1,23 @@
+﻿@model Onnorokom.ShoppingCart.Web.Models.Account.ConfirmEmailModel
+@{
+    ViewData["Title"] = "ConfirmEmail";
+    Layout = "_AccountLayout";
+}
+
+<div class="card-body">
+    @{
+        if (@Model.IsSuccess == true)
+        {
+            <p class="auth-subtitle mb-5">
+                @Model.StatusMessage
+                <a asp-area="Panel" asp-controller="Home" asp-action="Index">Go to Dashboard</a>
+            </p>
+        }
+        else
+        {
+            <p class="auth-subtitle mb-5"> @Model.StatusMessage</p>
+        }
+    }
+</div>
+
+

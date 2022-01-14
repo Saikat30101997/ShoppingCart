@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Onnorokom.ShoppingCart.Web.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace Onnorokom.ShoppingCart.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<RegisterModel>().AsSelf();
+            builder.RegisterType<LoginModel>().AsSelf();
+            builder.RegisterType<ConfirmEmailModel>().AsSelf();
+            builder.RegisterType<ForgotPasswordModel>().AsSelf();
+            builder.RegisterType<ResetPasswordModel>().AsSelf();
+
             base.Load(builder);
         }
     }

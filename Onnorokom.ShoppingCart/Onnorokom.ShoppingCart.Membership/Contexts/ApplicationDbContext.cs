@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Onnorokom.ShoppingCart.Membership.Entities;
+using Onnorokom.ShoppingCart.Membership.Seeds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,9 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
+            modelBuilder.Entity<Role>()
+               .HasData(DataSeed.Roles);
 
             base.OnModelCreating(modelBuilder);
         }

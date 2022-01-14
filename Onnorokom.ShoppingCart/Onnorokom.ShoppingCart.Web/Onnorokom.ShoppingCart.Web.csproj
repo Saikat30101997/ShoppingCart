@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Onnorokom.ShoppingCart.Common\Onnorokom.ShoppingCart.Common.csproj" />
     <ProjectReference Include="..\Onnorokom.ShoppingCart.Membership\Onnorokom.ShoppingCart.Membership.csproj" />
   </ItemGroup>
 

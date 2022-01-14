@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Onnorokom.ShoppingCart.Common;
+using Onnorokom.ShoppingCart.Common.Common;
 using Onnorokom.ShoppingCart.Membership;
 using Onnorokom.ShoppingCart.Membership.Contexts;
 using Onnorokom.ShoppingCart.Membership.Entities;
@@ -44,6 +46,7 @@ namespace Onnorokom.ShoppingCart.Web
             var connectionInfo = GetConnectionStringAndAssemblyName();
 
             builder.RegisterModule(new WebModule());
+            builder.RegisterModule(new CommonModule());
             builder.RegisterModule(new MembershipModule(connectionInfo.connectionString,
                 connectionInfo.migrationAssemblyName));
         }
@@ -66,10 +69,10 @@ namespace Onnorokom.ShoppingCart.Web
                         options.UseSqlServer(connectionInfo.connectionString, b =>
                         b.MigrationsAssembly(connectionInfo.migrationAssemblyName)));
 
-            services  
+            services
                 .AddIdentity<ApplicationUser, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddUserManager<UserManager>() 
+                .AddUserManager<UserManager>()
                 .AddRoleManager<RoleManager>()
                 .AddSignInManager<SignInManager>()
                 .AddDefaultUI()
@@ -93,7 +96,18 @@ namespace Onnorokom.ShoppingCart.Web
                 // User settings.
                 options.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
+            });
+
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                    opt.TokenLifespan = TimeSpan.FromHours(2));
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -106,6 +120,8 @@ namespace Onnorokom.ShoppingCart.Web
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+
+            services.Configure<ConfirmationEmailSettings>(Configuration.GetSection("ConfirmEmail"));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
             services.AddRazorPages();

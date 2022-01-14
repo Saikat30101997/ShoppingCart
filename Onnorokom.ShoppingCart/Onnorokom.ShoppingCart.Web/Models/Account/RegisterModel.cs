@@ -24,9 +24,14 @@ namespace Onnorokom.ShoppingCart.Web.Models.Account
         public string ConfirmPassword { get; set; }
         public string ReturnUrl { get; set; }
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
+        private ILifetimeScope _scope;
         public RegisterModel()
         {
+        }
+
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
         }
     }
 }

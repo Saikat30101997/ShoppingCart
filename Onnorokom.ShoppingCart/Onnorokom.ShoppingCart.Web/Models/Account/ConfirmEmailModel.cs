@@ -8,9 +8,14 @@ namespace Onnorokom.ShoppingCart.Web.Models.Account
         public bool IsSuccess { get; set; }
 
         private ILifetimeScope _scope;
-
         public ConfirmEmailModel()
         {
         }
+        
+        public void Resolve(ILifetimeScope scope)
+        {
+            _scope = scope;
+        }
+
     }
 }

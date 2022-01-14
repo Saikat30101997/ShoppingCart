@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onnorokom.ShoppingCart.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onnorokom.ShoppingCart.Membership", "Onnorokom.ShoppingCart.Membership\Onnorokom.ShoppingCart.Membership.csproj", "{8DC3A77D-4A2C-49D6-9F63-9B021B4ED190}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onnorokom.ShoppingCart.Common", "Onnorokom.ShoppingCart.Common\Onnorokom.ShoppingCart.Common.csproj", "{8E0E9676-99C8-4B14-841F-4B831128E7EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8DC3A77D-4A2C-49D6-9F63-9B021B4ED190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC3A77D-4A2C-49D6-9F63-9B021B4ED190}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC3A77D-4A2C-49D6-9F63-9B021B4ED190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0E9676-99C8-4B14-841F-4B831128E7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0E9676-99C8-4B14-841F-4B831128E7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0E9676-99C8-4B14-841F-4B831128E7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0E9676-99C8-4B14-841F-4B831128E7EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
