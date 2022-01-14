@@ -14,6 +14,7 @@ using Onnorokom.ShoppingCart.Common.Common;
 using Onnorokom.ShoppingCart.Membership;
 using Onnorokom.ShoppingCart.Membership.Contexts;
 using Onnorokom.ShoppingCart.Membership.Entities;
+using Onnorokom.ShoppingCart.Membership.Seeds;
 using Onnorokom.ShoppingCart.Membership.Services;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,7 @@ namespace Onnorokom.ShoppingCart.Web
                 options.SlidingExpiration = true;
             });
 
+            services.AddSingleton<AdminDataSeed>();
             services.Configure<ConfirmationEmailSettings>(Configuration.GetSection("ConfirmEmail"));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
@@ -130,7 +132,7 @@ namespace Onnorokom.ShoppingCart.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdminDataSeed adminDataSeed)
         {
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
@@ -165,6 +167,8 @@ namespace Onnorokom.ShoppingCart.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
+
+                adminDataSeed.SeedUserAsync().Wait();
             });
         }
     }

@@ -161,8 +161,28 @@ namespace Onnorokom.ShoppingCart.Web.Controllers.Account
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    var roles = await _userManager.GetRolesAsync(user);
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(model.ReturnUrl);
+
+                    if (user != null)
+                    {
+                        if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+                        else
+                        {
+                            if (roles.Any(x => x.Contains("Admin")))
+                            {
+                                return RedirectToAction("Index", "Home", new { Area = "Admin" });
+                            }
+                            else
+                            {
+                                return RedirectToAction("Index", "Home");
+                            }
+                        }
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
