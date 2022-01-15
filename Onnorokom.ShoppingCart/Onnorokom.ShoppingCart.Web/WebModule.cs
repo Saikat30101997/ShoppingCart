@@ -21,6 +21,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<CreateCategoryModel>().AsSelf();
             builder.RegisterType<CategoryListModel>().AsSelf();
             builder.RegisterType<CreateProductModel>().AsSelf();
+            builder.RegisterType<ProductListModel>().AsSelf();
 
             base.Load(builder);
         }

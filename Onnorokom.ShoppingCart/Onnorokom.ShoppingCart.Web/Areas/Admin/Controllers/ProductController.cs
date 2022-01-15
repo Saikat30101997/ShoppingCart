@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Onnorokom.ShoppingCart.Common.DataTable;
 using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,16 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<ProductListModel>();
+            return View(model);
+        }
+
+        public JsonResult GetProductData()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var  model = _scope.Resolve<ProductListModel>();
+            var data = model.GetProductData(tableModel);
+            return Json(data);
         }
 
         public IActionResult CreateProduct()
