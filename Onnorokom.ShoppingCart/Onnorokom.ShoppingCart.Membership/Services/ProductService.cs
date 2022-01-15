@@ -25,7 +25,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             if (product == null)
                 throw new InvalidOperationException("Product must be provided");
 
-            var categoryentity = _shoppingCartUnitOfWork.Categories.Get(x => x.Name == product.CategoryName,null);
+            var categoryentity = _shoppingCartUnitOfWork.Categories.Get(x => x.Name == product.CategoryName,string.Empty);
             var categoryId = categoryentity[0].Id;
 
             product.CategoryId = categoryId;

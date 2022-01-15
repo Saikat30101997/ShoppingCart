@@ -16,14 +16,13 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
     public class CreateProductModel
     {
         [Required]
-        [StringLength(100,MinimumLength = 5 , ErrorMessage = "Product Name must be 5 to 100 characters")]
+        [StringLength(100,MinimumLength = 5)]
         public string Name { get; set; }
         [Required]
         public double Price { get; set; }
-        [Required]
         public string ImageName { get; set; }
         [Required]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Category Name must be 5 to 100 characters")]
+        [StringLength(100, MinimumLength = 5)]
         public string CategoryName { get; set; }
         [Required]
         public IFormFile ImageFile { get; set; }
@@ -53,7 +52,13 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
 
         internal void Create()
         {
-            var product = _mapper.Map<Product>(this);
+            var product = new Product
+            {
+                Name = Name,
+                Price = Price,
+                ImageName = ImageName,
+                CategoryName = CategoryName,
+            };
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = ImageFile.FileName;
             product.ImageName = DateTime.Now.ToString("yymmssfff") + "_" + fileName;
