@@ -52,5 +52,15 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             return (data, productData.total, productData.totalDisplay);
         }
+
+        public IList<Product> GetProductsByCategory()
+        {
+            IList<Entities.Product> productEntities = _shoppingCartUnitOfWork.Products.GetAll();
+
+            var productBO = (from product in productEntities
+             select _mapper.Map<Product>(product)).ToList();
+
+            return productBO;
+        }
     }
 }

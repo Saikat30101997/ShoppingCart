@@ -2,6 +2,7 @@
 using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories;
 using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products;
 using Onnorokom.ShoppingCart.Web.Models.Account;
+using Onnorokom.ShoppingCart.Web.Models.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<CategoryListModel>().AsSelf();
             builder.RegisterType<CreateProductModel>().AsSelf();
             builder.RegisterType<ProductListModel>().AsSelf();
+            builder.RegisterType<ProductModel>().AsSelf();
 
             base.Load(builder);
         }

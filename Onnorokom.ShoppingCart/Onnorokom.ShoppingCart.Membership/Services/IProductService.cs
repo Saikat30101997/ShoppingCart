@@ -12,5 +12,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         void Create(Product product);
         (IList<Product>records,int total,int totalDisplay) GetProducts(int pageIndex, 
             int pageSize, string searchText, string sortText);
+        IList<Product> GetProductsByCategory();
     }
 }
