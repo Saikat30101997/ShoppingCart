@@ -12,13 +12,14 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories
 {
     public class CreateCategoryModel
     {
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
+        [Required(ErrorMessage ="Please provide category name")]
+        [StringLength(100,MinimumLength =5,ErrorMessage ="Category name length must be between 5 to 100")]
         [Display(Name="Category Name")]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
 
-        private readonly ICategoryService _categoryService;
-        private readonly IMapper _mapper;
+        private ICategoryService _categoryService;
+        private IMapper _mapper;
         private ILifetimeScope _scope;
 
         public CreateCategoryModel()
@@ -35,6 +36,9 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories
         public void Resolve(ILifetimeScope scope)
         {
             _scope = scope;
+            _categoryService = _scope.Resolve<ICategoryService>();
+            _mapper = _scope.Resolve<IMapper>();
+
         }
 
         internal void Create()

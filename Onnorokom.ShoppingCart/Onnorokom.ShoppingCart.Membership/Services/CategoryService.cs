@@ -30,5 +30,17 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             _shoppingCartUnitOfWork.Save();
         }
+
+        public (IList<Category> records, int total, int totalDisplay) GetCategories(int pageIndex,
+            int pageSize, string searchText, string sortText)
+        {
+            var categoryListData = _shoppingCartUnitOfWork.Categories.GetDynamic(string.IsNullOrWhiteSpace(searchText) ?
+                null : x => x.Name.Contains(searchText), sortText, null, pageIndex, pageSize);
+
+            var data = (from category in categoryListData.data
+                        select _mapper.Map<Category>(category)).ToList();
+
+            return (data, categoryListData.total, categoryListData.totalDisplay);
+        }
     }
 }

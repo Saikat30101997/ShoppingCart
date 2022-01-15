@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Onnorokom.ShoppingCart.Common.DataTable;
 using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,18 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<CategoryListModel>();
+            return View(model);
         }
 
+        public JsonResult GetCategoryData()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<CategoryListModel>();
+            var data = model.GetCategoryData(tableModel);
+
+            return Json(data);
+        }
         public IActionResult CreateCategory()
         {
             var model = _scope.Resolve<CreateCategoryModel>();
@@ -45,7 +55,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
                 }
                 catch(Exception ex)
                 {
-                    ModelState.AddModelError(string.Empty, "Failed to create Category");
+                     ModelState.AddModelError(string.Empty, "Failed to create Category");
                     _logger.LogError(ex, "Category Creation Failed");
                 }
             }

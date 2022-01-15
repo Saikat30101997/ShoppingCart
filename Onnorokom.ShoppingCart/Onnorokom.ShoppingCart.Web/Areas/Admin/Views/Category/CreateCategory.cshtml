@@ -13,16 +13,20 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" method="post" asp-controller="Category"
+                    <form class="form-horizontal needs-validation" method="post" asp-controller="Category"
                           asp-action="CreateCategory" asp-antiforgery="true">
-                        <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="card-body">
                             <div class="form-group row">
                                 <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
+                                <div></div>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" asp-for="Name" id="name"
-                                           placeholder="Category Name">
-                                </div>
+                                           placeholder="Category Name" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                    <div class="invalid-tooltip">
+                                        Please provide category.
+                                    </div>
+                                </div> 
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -37,4 +41,25 @@
         </div>
     </div>
 </section>
+@section Scripts{
+    <script>
+    (function () {
+        'use strict'
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+    </script>
+}
 

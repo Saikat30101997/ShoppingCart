@@ -18,6 +18,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<ForgotPasswordModel>().AsSelf();
             builder.RegisterType<ResetPasswordModel>().AsSelf();
             builder.RegisterType<CreateCategoryModel>().AsSelf();
+            builder.RegisterType<CategoryListModel>().AsSelf();
 
             base.Load(builder);
         }
