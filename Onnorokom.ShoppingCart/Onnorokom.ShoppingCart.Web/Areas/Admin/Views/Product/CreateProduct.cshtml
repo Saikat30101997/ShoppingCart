@@ -1,0 +1,74 @@
+﻿@model Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products.CreateProductModel
+@{
+    ViewData["Title"] = "CreateProduct";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Create A New Product</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal needs-validation" enctype="multipart/form-data" method="post" asp-controller="Category"
+                          asp-action="CreateCategory" asp-antiforgery="true">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="Name" id="name"
+                                           placeholder="Product Name" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Price" class="col-sm-2 col-form-label">
+                                    Price
+                                </label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="Price" id="price"
+                                           placeholder="Product Price" required>
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="CategoryName" class="col-sm-2 col-form-label">
+                                    Price
+                                </label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="CategoryName" id="categoryName"
+                                           placeholder="Category Name" required>
+                                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="ImageFile" class="col-sm-2 col-form-label">
+                                    Image
+                                </label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control" asp-for="ImageFile" id="categoryName"
+                                           placeholder="Image" required>
+                                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Create</button>
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-default float-right">Cancel</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

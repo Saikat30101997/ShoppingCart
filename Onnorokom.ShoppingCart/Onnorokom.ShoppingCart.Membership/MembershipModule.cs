@@ -52,6 +52,8 @@ namespace Onnorokom.ShoppingCart.Membership
                 .InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<ProductService>().As<IProductService>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }

@@ -35,7 +35,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             int pageSize, string searchText, string sortText)
         {
             var categoryListData = _shoppingCartUnitOfWork.Categories.GetDynamic(string.IsNullOrWhiteSpace(searchText) ?
-                null : x => x.Name.Contains(searchText), sortText, null, pageIndex, pageSize);
+                null : x => x.Name.Contains(searchText), sortText, string.Empty, pageIndex, pageSize);
 
             var data = (from category in categoryListData.data
                         select _mapper.Map<Category>(category)).ToList();

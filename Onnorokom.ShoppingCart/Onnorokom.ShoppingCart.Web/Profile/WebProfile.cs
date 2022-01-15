@@ -13,6 +13,7 @@ namespace Onnorokom.ShoppingCart.Web.Profiles
         public WebProfile()
         {
             CreateMap<BO.Category, CreateCategoryModel>().ReverseMap();
+            CreateMap<BO.Product, CreateCategoryModel>().ReverseMap();
         }
     }
 }
