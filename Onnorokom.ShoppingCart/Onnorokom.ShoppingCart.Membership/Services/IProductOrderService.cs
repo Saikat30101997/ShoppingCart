@@ -11,5 +11,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
     {
         ProductOrder GetOrder(int id);
         void Create(ProductOrder productOrder);
+        (IList<ProductOrder>records,int total,int totalDisplay) GetProductOrders(int pageIndex, int pageSize,
+            string searchText, string sortText);
     }
 }

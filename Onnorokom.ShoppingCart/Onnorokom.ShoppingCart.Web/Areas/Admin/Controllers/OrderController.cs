@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Autofac;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Onnorokom.ShoppingCart.Common.DataTable;
+using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +11,31 @@ using System.Threading.Tasks;
 
 namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
 {
+    [Area("Admin"), Authorize(Roles = "Admin")]
     public class OrderController : Controller
     {
+        private readonly ILogger<OrderController> _logger;
+        private readonly ILifetimeScope _scope;
+
+        public OrderController(ILogger<OrderController> logger, ILifetimeScope scope)
+        {
+            _logger = logger;
+            _scope = scope;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<OrderListModel>();
+            return View(model);
+        }
+
+        public JsonResult GetOrderData()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<OrderListModel>();
+            var data = model.GetOrderData(tableModel);
+
+            return Json(data);
         }
     }
 }

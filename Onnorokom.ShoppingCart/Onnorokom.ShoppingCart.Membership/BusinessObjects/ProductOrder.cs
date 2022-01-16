@@ -16,5 +16,7 @@ namespace Onnorokom.ShoppingCart.Membership.BusinessObjects
         public DateTime DeliveryDate { get; set; }
         public string OrderStatus { get; set; }
         public int Quantity { get; set; }
+        public int Stock { get; set; }
+        public string ProductName { get; set; }
     }
 }
