@@ -58,5 +58,11 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             _shoppingCartUnitOfWork.Save();
         }
 
+        public Cart GetCart(int id)
+        {
+            var cart = _shoppingCartUnitOfWork.Carts.GetById(id);
+
+            return _mapper.Map<Cart>(cart);
+        }
     }
 }

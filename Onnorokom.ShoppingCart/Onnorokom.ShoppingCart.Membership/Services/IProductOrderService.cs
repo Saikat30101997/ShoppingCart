@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Onnorokom.ShoppingCart.Membership.BusinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 {
     public interface IProductOrderService
     {
+        ProductOrder GetOrder(int id);
     }
 }
