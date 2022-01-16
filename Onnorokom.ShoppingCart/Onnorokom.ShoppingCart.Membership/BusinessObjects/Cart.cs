@@ -11,5 +11,7 @@ namespace Onnorokom.ShoppingCart.Membership.BusinessObjects
         public int Id { get; set; }
         public int ProductId { get; set; }
         public Guid UserId { get; set; }
+        public string ProductName { get; set; }
+
     }
 }

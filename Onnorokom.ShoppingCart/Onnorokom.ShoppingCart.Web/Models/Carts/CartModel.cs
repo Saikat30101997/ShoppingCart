@@ -47,7 +47,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
               tableModel.PageIndex,
               tableModel.PageSize,
               tableModel.SearchText,
-              tableModel.GetSortText(new string[] { "Name" }));
+              tableModel.GetSortText(new string[] { "ProductName" }));
 
             return new
             {
@@ -56,7 +56,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
                 data = (from record in data.records
                         select new string[]
                         {
-                                record.Name,
+                                record.ProductName,
                                 record.Id.ToString()
                         }
                     ).ToArray()
