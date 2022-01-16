@@ -37,6 +37,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
 
             return Json(data);
         }
+
         public IActionResult CreateCategory()
         {
             var model = _scope.Resolve<CreateCategoryModel>();
@@ -46,11 +47,18 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
         [HttpPost,ValidateAntiForgeryToken]
         public IActionResult CreateCategory(CreateCategoryModel model)
         {
+            model.Resolve(_scope);
+
+            if (model.IsCategoryAlreadyCreated(model.Name) == true)
+            {
+                ModelState.AddModelError(string.Empty, "Category is already created");
+                return View();
+            }
+
             if(ModelState.IsValid)
             {
                 try
                 {
-                    model.Resolve(_scope);
                     model.Create();
                 }
                 catch(Exception ex)

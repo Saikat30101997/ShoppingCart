@@ -7,13 +7,12 @@
 </section>
 
 
-      
-<div class="content-wrapper" style="padding-top:10px;padding-left:30px;">
-@if(Model.Products.Count > 0)
-{ 
-foreach (var product in Model.Products)
-{
-<div class="row">
+<div class="row" style="padding-top:10px;padding-left:10px;">
+    @if (Model.Products.Count > 0)
+    {
+        foreach (var product in Model.Products)
+        {
+
     <div class="col-md-3">
         <div class="card card-widget widget-user-2 shadow-sm">
             <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -33,9 +32,10 @@ foreach (var product in Model.Products)
                     </li>
                 </ul>
             </div>
-            <button type="submit" style="text-align:center" onclick="window.location.href = '/home/addtocart/@product.Id'" value=@product.Id>Add To Cart</button>
-        </div> 
+        </div>
+        <button type="submit" style="text-align:center" onclick="window.location.href = '/cart/addtocart/@product.Id'" value=@product.Id>Add To Cart</button>
     </div>
-</div>}
-}
+                    }
+            }
+
 </div>

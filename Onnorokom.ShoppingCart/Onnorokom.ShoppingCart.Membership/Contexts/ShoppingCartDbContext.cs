@@ -32,5 +32,9 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Stock> Stocks { get; set; }
+        public DbSet<ProductOrder> ProductOrders { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+
     }
 }

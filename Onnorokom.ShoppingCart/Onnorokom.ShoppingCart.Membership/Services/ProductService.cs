@@ -31,9 +31,26 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             product.CategoryId = categoryId;
 
             _shoppingCartUnitOfWork.Products.Add(
-                _mapper.Map<Entities.Product>(product));
+                new Entities.Product
+                {
+                    CategoryId = product.CategoryId,
+                    ImageName = product.ImageName,
+                    Price = product.Price
+                });
 
             _shoppingCartUnitOfWork.Save();
+        }
+
+        public Product GetProduct(int id)
+        {
+            var productEntity = _shoppingCartUnitOfWork.Products.GetById(id);
+            var categoryEnitity = _shoppingCartUnitOfWork.Categories.GetById(productEntity.CategoryId);
+
+            var product = _mapper.Map<Product>(productEntity);
+
+            product.CategoryName = categoryEnitity.Name;
+
+            return product;
         }
 
         public (IList<Product> records, int total, int totalDisplay) GetProducts(int pageIndex, 
@@ -47,7 +64,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             for(int i=0;i<data.Count;i++)
             {
-                data[i].CategoryName = productData.data[0].Category.Name;
+                data[i].CategoryName = productData.data[i].Category.Name;
             }
 
             return (data, productData.total, productData.totalDisplay);
@@ -61,6 +78,30 @@ namespace Onnorokom.ShoppingCart.Membership.Services
              select _mapper.Map<Product>(product)).ToList();
 
             return productBO;
+        }
+
+        public void Update(Product product)
+        {
+            if (product == null)
+                throw new InvalidOperationException("Product is not provided");
+
+            var productEntity = _shoppingCartUnitOfWork.Products.GetById(product.Id);
+
+            var categoryEntity = _shoppingCartUnitOfWork.Categories.Get(x => x.Name == product.CategoryName, string.Empty);
+            product.CategoryId = categoryEntity[0].Id;
+
+            if (productEntity != null)
+            {
+                productEntity.Id = product.Id;
+                productEntity.Name = product.Name;
+                productEntity.ImageName = product.ImageName;
+                productEntity.Price = product.Price;
+                productEntity.CategoryId = product.CategoryId;
+                _shoppingCartUnitOfWork.Save();
+            }
+            else
+                throw new InvalidOperationException("Product is not updated");
+
         }
     }
 }

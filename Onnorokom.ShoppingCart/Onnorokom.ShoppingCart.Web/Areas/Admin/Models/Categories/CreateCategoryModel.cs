@@ -46,5 +46,15 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Categories
             var category = _mapper.Map<Category>(this);
             _categoryService.CreateCategory(category);
         }
+
+        internal bool IsCategoryAlreadyCreated(string name)
+        {
+            bool check = _categoryService.IsCategoryAlreadyCreated(name);
+
+            if (check == true)
+                return true;
+            else
+                return false;
+        }
     }
 }

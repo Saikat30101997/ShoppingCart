@@ -42,5 +42,15 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             return (data, categoryListData.total, categoryListData.totalDisplay);
         }
+
+        public bool IsCategoryAlreadyCreated(string name)
+        {
+            int count = _shoppingCartUnitOfWork.Categories.GetCount(x => x.Name == name);
+
+            if (count >= 1)
+                return true;
+            else
+                return false;
+        }
     }
 }

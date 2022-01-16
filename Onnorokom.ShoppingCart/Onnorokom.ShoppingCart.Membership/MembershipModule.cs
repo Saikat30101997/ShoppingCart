@@ -48,12 +48,17 @@ namespace Onnorokom.ShoppingCart.Membership
                 .InstancePerLifetimeScope();
             builder.RegisterType<ProductRepository>().As<IProductRepository>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<CartRepository>().As<ICartRepository>()
+                .InstancePerLifetimeScope();
             builder.RegisterType<ShoppingCartUnitOfWork>().As<IShoppingCartUnitOfWork>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<CategoryService>().As<ICategoryService>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<ProductService>().As<IProductService>()
                 .InstancePerLifetimeScope();
+            builder.RegisterType<CartService>().As<ICartService>()
+            .InstancePerLifetimeScope();
+
 
             base.Load(builder);
         }

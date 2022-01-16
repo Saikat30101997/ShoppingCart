@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace Onnorokom.ShoppingCart.Membership.Entities
 {
-    public class ProductOrder : IEntity<int>
+    public class Cart : IEntity<int>
     {
         public int Id { get; set; }
+        public int ProductId { get; set; }
         public Guid UserId { get; set; }
-        public string UserEmail { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
-        public string OrderStatus { get; set; }
-        public string Quantity { get; set; }
     }
 }

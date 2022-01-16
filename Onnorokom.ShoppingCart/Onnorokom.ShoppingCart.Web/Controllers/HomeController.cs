@@ -28,9 +28,5 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
             return View(model);
         }
 
-        public IActionResult AddtoCart(int id)
-        {
-            return RedirectToAction(nameof(Index));
-        }
     }
 }

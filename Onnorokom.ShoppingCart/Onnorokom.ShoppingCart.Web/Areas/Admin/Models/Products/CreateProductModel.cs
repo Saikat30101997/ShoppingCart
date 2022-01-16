@@ -59,6 +59,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
                 ImageName = ImageName,
                 CategoryName = CategoryName,
             };
+
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = ImageFile.FileName;
             product.ImageName = DateTime.Now.ToString("yymmssfff") + "_" + fileName;

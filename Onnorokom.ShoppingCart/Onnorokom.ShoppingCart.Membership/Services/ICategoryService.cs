@@ -12,5 +12,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         void CreateCategory(Category category);
         (IList<Category>records, int total,int totalDisplay) GetCategories(int pageIndex, 
             int pageSize, string searchText, string sortText);
+        bool IsCategoryAlreadyCreated(string name);
     }
 }
