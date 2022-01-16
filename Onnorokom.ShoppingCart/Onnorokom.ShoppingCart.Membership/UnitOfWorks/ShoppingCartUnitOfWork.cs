@@ -15,14 +15,17 @@ namespace Onnorokom.ShoppingCart.Membership.UnitOfWorks
         public ICategoryRepository Categories { get; private set; }
         public IProductRepository Products { get; private set; }
         public ICartRepository Carts { get; private set; }
+        public IProductOrderRepository ProductOrders { get; private set; }
 
         public ShoppingCartUnitOfWork(IShoppingCartDbContext context,
-           IProductRepository products, ICategoryRepository categories,ICartRepository carts) :
+           IProductRepository products, ICategoryRepository categories,
+           ICartRepository carts, IProductOrderRepository productOrders) :
            base((DbContext)context)
         {
             Products = products;
             Categories = categories;
             Carts = carts;
+            ProductOrders = productOrders;
         }
     }
 }

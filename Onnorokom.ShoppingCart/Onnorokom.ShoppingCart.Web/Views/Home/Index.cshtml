@@ -1,41 +1,40 @@
 ﻿@model Onnorokom.ShoppingCart.Web.Models.Products.ProductModel
+
 @{ 
-    ViewData["Title"] = "Home";}
+    ViewData["Title"] = "Home";
+}
 
 <section>
-    
 </section>
 
-
 <div class="row" style="padding-top:10px;padding-left:10px;">
-    @if (Model.Products.Count > 0)
+    @for (int i = 0; i < Model.Products.Count && Model.Products.Count > 0; i++)
     {
-        foreach (var product in Model.Products)
-        {
+<div class="col-md-3">
 
-    <div class="col-md-3">
-        <div class="card card-widget widget-user-2 shadow-sm">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-warning">
-                <div class="widget-user-image">
-                    <img class="img-circle elevation-2" src="/Image/@product.ImageName" alt="User Avatar">
-                </div>
-                <!-- /.widget-user-image -->
-                <h3 class="widget-user-username">@product.Name</h3>
+    <div class="card card-widget widget-user-2 shadow-sm">
+        <!-- Add the bg color to the header using any of the bg-* classes -->
+        <div class="widget-user-header bg-warning">
+            <div class="widget-user-image">
+                <img class="img-circle elevation-2" src="/Image/@Model.Products[i].ImageName" style="width:50px;height:50px;" alt="User Avatar">
             </div>
-            <div class="card-footer p-0">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            Price <span class="float-right badge bg-primary">@product.Price</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <!-- /.widget-user-image -->
+            <h3 class="widget-user-username">@Model.Products[i].Name</h3>
         </div>
-        <button type="submit" style="text-align:center" onclick="window.location.href = '/cart/addtocart/@product.Id'" value=@product.Id>Add To Cart</button>
-    </div>
-                    }
-            }
+        <div class="card-footer p-0">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link">
+                        Price <span class="float-right badge bg-primary">@Model.Products[i].Price</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
+        <button type="submit" style="text-align:center" onclick="window.location.href = '/cart/addtocart/@Model.Products[i].Id'" value=@Model.Products[i].Id>Add To Cart</button>
+    </div>
+    
+
+</div>
+    }
 </div>
