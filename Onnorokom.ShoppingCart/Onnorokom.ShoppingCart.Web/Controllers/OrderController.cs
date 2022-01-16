@@ -39,7 +39,7 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
         }
 
         [HttpPost,ValidateAntiForgeryToken]
-        public IActionResult OrderProduct(OrderModel model)
+        public async Task<IActionResult> OrderProduct(OrderModel model)
         {
             model.Resolve(_scope);
             if(ModelState.IsValid)
@@ -49,7 +49,7 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
                     ViewBag.UserId = _userManager.GetUserId(HttpContext.User);
                     string s = ViewBag.UserId;
                     Guid userId = Guid.Parse(s);
-                    var user = _userManager.GetUserAsync(HttpContext.User);
+                    var user =await _userManager.GetUserAsync(HttpContext.User);
                     string email = Convert.ToString(user);
                     model.Create(userId, email);
                 }

@@ -47,9 +47,10 @@
                     </form>
                     <div class="card-body">
                         <form method="post" asp-controller="Order" asp-action="OrderProduct" asp-antiforgery="true" >
+                            <input asp-for="Name" type="hidden"/>
                             <div class="row" style="padding-bottom:10px;">
                                 <div class="col-3">
-                                    <input type="number" class="form-control" placeholder="Quantity" required>
+                                    <input type="number" asp-for="Quantity" class="form-control" placeholder="Quantity" required>
                                 </div>
                                 <span asp-validation-for="Quantity"></span>
                             </div>

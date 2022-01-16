@@ -10,5 +10,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
     public interface IProductOrderService
     {
         ProductOrder GetOrder(int id);
+        void Create(ProductOrder productOrder);
     }
 }

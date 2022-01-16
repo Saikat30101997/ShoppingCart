@@ -20,6 +20,17 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             _mapper = mapper;
         }
 
+        public void Create(ProductOrder productOrder)
+        {
+            if (productOrder == null)
+                throw new InvalidOperationException("Product Order must be provided");
+
+            _shoppingCartUnitOfWork.ProductOrders.Add(
+                _mapper.Map<Entities.ProductOrder>(productOrder));
+
+            _shoppingCartUnitOfWork.Save();
+        }
+
         public ProductOrder GetOrder(int id)
         {
             var order = _shoppingCartUnitOfWork.ProductOrders.GetById(id);

@@ -15,5 +15,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         IList<Product> GetProductsByCategory();
         Product GetProduct(int id);
         void Update(Product product);
+        int GetProductId(string name);
     }
 }

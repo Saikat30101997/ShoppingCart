@@ -53,6 +53,17 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             return product;
         }
 
+        public int GetProductId(string name)
+        {
+            var productEntity = _shoppingCartUnitOfWork.Products.Get(x => x.Name == name, string.Empty);
+
+            var product = new Product();
+
+            product.Id = productEntity[0].Id;
+
+            return product.Id;
+        }
+
         public (IList<Product> records, int total, int totalDisplay) GetProducts(int pageIndex, 
             int pageSize, string searchText, string sortText)
         {

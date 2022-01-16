@@ -22,7 +22,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
         public DateTime? DeliveryDate { get; set; }
         public string OrderStatus { get; set; }
         [Required]
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
         public string ImageName { get; set; }
         public string Name { get; set; }
         public string CategoryName { get; set; }
@@ -53,14 +53,18 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
 
         internal void Create(Guid userId, string email)
         {
+            int productId = _productService.GetProductId(Name);
             var productOrder = new ProductOrder
             {
                 UserId = userId,
                 UserEmail = email,
                 OrderDate = DateTime.Today,
                 OrderStatus = "Pending",
-
+                ProductId = productId,
+                Quantity = Quantity,
             };
+
+            _productOrderService.Create(productOrder);
         }
 
         internal void LoadModelData(int id)
