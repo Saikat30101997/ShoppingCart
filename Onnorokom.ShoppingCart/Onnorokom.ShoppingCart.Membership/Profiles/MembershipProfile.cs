@@ -18,6 +18,7 @@ namespace Onnorokom.ShoppingCart.Membership.Profiles
             CreateMap<EO.Cart, BO.Cart>().ReverseMap();
             CreateMap<EO.ProductOrder, BO.ProductOrder>().ReverseMap();
             CreateMap<EO.Stock, BO.Stock>().ReverseMap();
+            CreateMap<EO.Purchase, BO.Purchase>().ReverseMap();
         }
     }
 }
