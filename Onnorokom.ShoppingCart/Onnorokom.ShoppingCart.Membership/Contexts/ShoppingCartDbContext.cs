@@ -35,6 +35,7 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<ProductOrder> ProductOrders { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
 
     }
 }
