@@ -1,0 +1,52 @@
+﻿@model Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Stocks.CreateStockModel
+@{
+    ViewData["Title"] = "CreateStock";
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Create Stock</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal needs-validation" method="post" asp-controller="Stock"
+                          asp-action="CreateStock" asp-antiforgery="true">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label asp-for="ProductName" class="col-sm-2 col-form-label">Product Name</label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="ProductName" id="name"
+                                           placeholder="Product Name" required>
+                                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label asp-for="Quantity" class="col-sm-2 col-form-label">Quantity</label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="Quantity" id="name"
+                                           placeholder="Quantity" required>
+                                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">Create</button>
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-default float-right">Cancel</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
