@@ -11,6 +11,7 @@ namespace Onnorokom.ShoppingCart.Membership.Entities
     {
         public int Id { get; set; }
         public string SellerName { get; set; }
+        public string ProductName { get; set; }
         public DateTime PurchaseDate { get; set; }
         public double Price { get; set; }
         public int Quantity { get; set; }

@@ -2,7 +2,7 @@
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
-     with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
         <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
                 <i class="nav-icon"></i>
@@ -72,6 +72,27 @@
                 </li>
                 <li class="nav-item">
                     <a asp-controller="Stock" asp-action="Index" class="nav-link">
+                        <p>Stock List</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon"></i>
+                <p>
+                    Purchases
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a asp-controller="Purchase" asp-action="CreatePurchase" class="nav-link">
+                        <p>Create</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Purchase" asp-action="Index" class="nav-link">
                         <p>Stock List</p>
                     </a>
                 </li>

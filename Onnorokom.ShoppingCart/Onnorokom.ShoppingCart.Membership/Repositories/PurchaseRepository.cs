@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Onnorokom.ShoppingCart.Membership.Repositories
 {
-    public class PurchaseRepository : Repository<Purchase,int>
+    public class PurchaseRepository : Repository<Purchase,int> ,IPurchaseRepository
     {
         public PurchaseRepository(IShoppingCartDbContext context) :
            base((DbContext)context)

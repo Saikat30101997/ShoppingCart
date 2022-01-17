@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Onnorokom.ShoppingCart.Membership.BusinessObjects;
 using Onnorokom.ShoppingCart.Membership.UnitOfWorks;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,19 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         {
             _shoppingCartUnitOfWork = shoppingCartUnitOfWork;
             _mapper = mapper;
+        }
+
+        public void Create(Purchase purchase)
+        {
+            if (purchase == null)
+                throw new InvalidOperationException("Purchase must be provided");
+
+            purchase.TotalPrice = purchase.Quantity * purchase.Price;
+
+            _shoppingCartUnitOfWork.Purchases.Add(
+                _mapper.Map<Entities.Purchase>(purchase));
+
+            _shoppingCartUnitOfWork.Save();
         }
     }
 }
