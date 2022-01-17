@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Onnorokom.ShoppingCart.Common.DataTable;
 using Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Stocks;
 using System;
 using System.Collections.Generic;
@@ -23,12 +24,42 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<StockListModel>();
+            return View(model);
+        }
+
+        public JsonResult GetStockData()
+        {
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<StockListModel>();
+            var data = model.GetStockData(tableModel);
+
+            return Json(data);
         }
 
         public IActionResult CreateStock()
         {
             var model = _scope.Resolve<CreateStockModel>();
+
+            return View(model);
+        }
+        
+        [HttpPost,ValidateAntiForgeryToken]
+        public IActionResult CreateStock(CreateStockModel model)
+        {
+            model.Resolve(_scope);
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    model.Create();
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Failed to create stock");
+                    _logger.LogError(ex, "Stock Creation Failed");
+                }
+            }
 
             return View(model);
         }

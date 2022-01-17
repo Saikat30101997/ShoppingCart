@@ -33,6 +33,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<OrderModel>().AsSelf();
             builder.RegisterType<OrderListModel>().AsSelf();
             builder.RegisterType<CreateStockModel>().AsSelf();
+            builder.RegisterType<StockListModel>().AsSelf();
 
             base.Load(builder);
         }

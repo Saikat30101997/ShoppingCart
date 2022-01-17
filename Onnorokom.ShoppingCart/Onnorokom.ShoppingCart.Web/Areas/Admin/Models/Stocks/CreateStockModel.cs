@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Onnorokom.ShoppingCart.Membership.BusinessObjects;
 using Onnorokom.ShoppingCart.Membership.Services;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,17 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Stocks
         {
             _scope = scope;
             _stockService = _scope.Resolve<IStockService>();
+        }
+
+        internal void Create()
+        {
+            var stock = new Stock
+            {
+                ProductName = ProductName,
+                Quantity = Quantity
+            };
+
+            _stockService.Create(stock);
         }
     }
 }

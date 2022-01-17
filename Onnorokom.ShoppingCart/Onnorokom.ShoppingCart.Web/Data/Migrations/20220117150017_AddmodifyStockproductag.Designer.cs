@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Onnorokom.ShoppingCart.Membership.Contexts;
 
-namespace Onnorokom.ShoppingCart.Web.Data.Migrations
+namespace Onnorokom.ShoppingCart.Web.Migrations.ShoppingCartDb
 {
     [DbContext(typeof(ShoppingCartDbContext))]
-    partial class ShoppingCartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220117150017_AddmodifyStockproductag")]
+    partial class AddmodifyStockproductag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,6 +137,9 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
                     b.ToTable("Stocks");
                 });
 
@@ -149,9 +154,25 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Stock", b =>
+                {
+                    b.HasOne("Onnorokom.ShoppingCart.Membership.Entities.Product", "Product")
+                        .WithOne("Stock")
+                        .HasForeignKey("Onnorokom.ShoppingCart.Membership.Entities.Stock", "ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Product", b =>
+                {
+                    b.Navigation("Stock");
                 });
 #pragma warning restore 612, 618
         }
