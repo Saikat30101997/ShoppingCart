@@ -15,5 +15,6 @@ namespace Onnorokom.ShoppingCart.Membership.UnitOfWorks
         ICartRepository Carts { get; }
         IProductOrderRepository ProductOrders { get; }
         IStockRepository Stocks { get; }
+        IPurchaseRepository Purchases { get; }
     }
 }

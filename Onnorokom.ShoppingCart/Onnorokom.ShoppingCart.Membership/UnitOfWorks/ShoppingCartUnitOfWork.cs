@@ -17,11 +17,12 @@ namespace Onnorokom.ShoppingCart.Membership.UnitOfWorks
         public ICartRepository Carts { get; private set; }
         public IProductOrderRepository ProductOrders { get; private set; }
         public IStockRepository Stocks { get; private set; }
+        public IPurchaseRepository Purchases { get; private set; }
 
         public ShoppingCartUnitOfWork(IShoppingCartDbContext context,
            IProductRepository products, ICategoryRepository categories,
            ICartRepository carts, IProductOrderRepository productOrders,
-           IStockRepository stocks) :
+           IStockRepository stocks, IPurchaseRepository purchases) :
            base((DbContext)context)
         {
             Products = products;
@@ -29,6 +30,7 @@ namespace Onnorokom.ShoppingCart.Membership.UnitOfWorks
             Carts = carts;
             ProductOrders = productOrders;
             Stocks = stocks;
+            Purchases = purchases;
         }
     }
 }
