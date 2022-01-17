@@ -18,5 +18,6 @@ namespace Onnorokom.ShoppingCart.Membership.BusinessObjects
         public int Quantity { get; set; }
         public int Stock { get; set; }
         public string ProductName { get; set; }
+        public double TotalPrice { get; set; }
     }
 }

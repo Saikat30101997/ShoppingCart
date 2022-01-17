@@ -1,0 +1,44 @@
+﻿@model Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders.OrderListModel
+@{
+    ViewData["Title"] = "AcceptProductOrder";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Order Confirm</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal needs-validation" method="post" asp-controller="Order"
+                          asp-action="AcceptProductOrder" asp-antiforgery="true">
+                        <input asp-for="Id" type="hidden"/>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label asp-for="DeliveryDate" class="col-sm-2 col-form-label">Delivery Date</label>
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="DeliveryDate" id="deliverydate"
+                                           placeholder="Product Name" required>
+                                    <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Confirm</button>
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="btn btn-default float-right">Cancel</a>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

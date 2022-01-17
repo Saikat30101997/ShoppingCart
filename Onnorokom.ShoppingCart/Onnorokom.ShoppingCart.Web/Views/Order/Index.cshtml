@@ -13,86 +13,73 @@
     <script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function () {
-            $('#products').DataTable({
+            $('#orders').DataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "/Cart/GetCartData",
+                "ajax": "/Order/GetOrderDataForUser",
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": 2,
+                        "targets": 6,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/order/orderproduct/${data}'" value='${data}'>
-                                                            <i>
-                                                            </i>
-                                                            Order
-                                                        </button>
-                                                        <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </button>`;
+                            return `<button type="submit" class="btn btn-success btn-sm" onclick="window.location.href='/order/cancelproductorder/${data}'" value='${data}'>
+                                                        Accept
+                                                    </button>`
                         }
                     }
                 ]
-            });
-            $('#products').on('click', '.show-bs-modal', function (event) {
-                var id = $(this).data("id");
-                var modal = $("#modal-default");
-                modal.find('.modal-body p').text('Are you sure you want to delete this record?')
-                $("#deleteId").val(id);
-                $("#deleteForm").attr("action", "/cart/delete")
-                modal.modal('show');
-            });
-            $("#deleteButton").click(function () {
-                $("#deleteForm").submit();
             });
         });
     </script>
 }
 
-<section class="content-header" style="padding-left:50px;">
+<section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Your Cart List</h1>
+                <h1>Your Orders</h1>
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  
-                </ol>
+
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 
-<section class="content" style="padding-left:50px;padding-right:50px;">
+<section class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Carts</h3>
+                        <h3 class="card-title">Orders</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="products" class="table table-bordered table-hover">
+                        <table id="orders" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Date</th>
+                                    <th>Order Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Order Status</th>
+                                    <th>Quantity</th>
+                                    <th>TotalPrice</th>
                                     <th style="width:150px">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Date</th>
+                                    <th>Order Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Order Status</th>
+                                    <th>Quantity</th>
+                                    <th>TotalPrice</th>
                                     <th style="width:150px">Action</th>
                                 </tr>
                             </tfoot>
                         </table>
-                        @*<partial name="_DeletePopUpPartial" />*@
                     </div>
                     <!-- /.card-body -->
                 </div>

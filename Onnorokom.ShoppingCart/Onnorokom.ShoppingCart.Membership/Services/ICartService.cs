@@ -13,5 +13,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         (IList<Cart>records,int total,int totalDisplay) Carts(Guid userId, int pageIndex, 
             int pageSize, string searchText, string sortText);
         Cart GetCart(int id);
+        void RemoveCart(Guid userId, int productId);
     }
 }

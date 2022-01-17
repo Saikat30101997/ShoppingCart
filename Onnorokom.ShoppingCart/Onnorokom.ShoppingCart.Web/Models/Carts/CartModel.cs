@@ -34,7 +34,8 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
             var cart = new Cart
             {
                 ProductId = id,
-                UserId = userId
+                UserId = userId,
+                Date = DateTime.Today
             };
 
             _cartService.Create(cart);
@@ -47,7 +48,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
               tableModel.PageIndex,
               tableModel.PageSize,
               tableModel.SearchText,
-              tableModel.GetSortText(new string[] { "ProductName" }));
+              tableModel.GetSortText(new string[] { "ProductName","Date" }));
 
             return new
             {
@@ -57,6 +58,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
                         select new string[]
                         {
                                 record.ProductName,
+                                record.Date.ToString(),
                                 record.Id.ToString()
                         }
                     ).ToArray()

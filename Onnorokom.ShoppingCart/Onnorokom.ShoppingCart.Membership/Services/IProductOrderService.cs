@@ -13,5 +13,8 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         void Create(ProductOrder productOrder);
         (IList<ProductOrder>records,int total,int totalDisplay) GetProductOrders(int pageIndex, int pageSize,
             string searchText, string sortText);
+        void AcceptProductOrder(int id, DateTime DeliveryDate);
+        (IList<ProductOrder> records, int total, int totalDisplay) GetProductOrdersForUser(Guid userId, int pageIndex, int pageSize,
+            string searchText, string sortText);
     }
 }

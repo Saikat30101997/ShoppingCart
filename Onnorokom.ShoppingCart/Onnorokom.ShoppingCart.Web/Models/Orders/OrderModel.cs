@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Onnorokom.ShoppingCart.Common.DataTable;
 using Onnorokom.ShoppingCart.Membership.BusinessObjects;
 using Onnorokom.ShoppingCart.Membership.Services;
 using System;
@@ -65,6 +66,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
             };
 
             _productOrderService.Create(productOrder);
+            _cartService.RemoveCart(userId, productId);
         }
 
         internal void LoadModelData(int id)
@@ -75,6 +77,36 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
             Price = product.Price;
             ImageName = product.ImageName;
             Name = product.Name;
+
         }
+
+        internal object GetOrderDataForUser(DataTablesAjaxRequestModel tableModel,Guid userId)
+        {
+            var data = _productOrderService.GetProductOrdersForUser(
+               userId,
+               tableModel.PageIndex,
+               tableModel.PageSize,
+               tableModel.SearchText,
+               tableModel.GetSortText(new string[] { "ProductName", "OrderDate", "DeliveryDate", "OrderStatus", "Quantity", "TotalPrice" }));
+
+            return new
+            {
+                recordsTotal = data.total,
+                recordsFiltered = data.totalDisplay,
+                data = (from record in data.records
+                        select new string[]
+                        {
+                            record.ProductName,
+                            record.OrderDate.ToString(),
+                            record.DeliveryDate.ToString(),
+                            record.OrderStatus,
+                            record.Quantity.ToString(),
+                            record.TotalPrice.ToString(),
+                            record.Id.ToString()
+                        }
+                    ).ToArray()
+            };
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Onnorokom.ShoppingCart.Common.DataTable;
 using Onnorokom.ShoppingCart.Membership.Entities;
 using Onnorokom.ShoppingCart.Web.Models.Orders;
 using System;
@@ -27,7 +28,20 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = _scope.Resolve<OrderModel>();
+            return View(model);
+        }
+
+        public JsonResult GetOrderDataForUser()
+        {
+            ViewBag.UserId = _userManager.GetUserId(HttpContext.User);
+            string s = ViewBag.UserId;
+            Guid userId = Guid.Parse(s);
+            var tableModel = new DataTablesAjaxRequestModel(Request);
+            var model = _scope.Resolve<OrderModel>();
+            var data = model.GetOrderDataForUser(tableModel,userId);
+
+            return Json(data);
         }
 
         public IActionResult OrderProduct(int id)

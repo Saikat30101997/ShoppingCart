@@ -37,5 +37,31 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
 
             return Json(data);
         }
+
+        public IActionResult AcceptProductOrder(int id)
+        {
+            var model = _scope.Resolve<OrderListModel>();
+
+            return View(model);
+        }
+
+        [HttpPost,ValidateAntiForgeryToken]
+        public IActionResult AcceptProductOrder(OrderListModel model)
+        {
+            model.Resolve(_scope);
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    model.AcceptProductOrder();
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Product Order is not Confirmed");
+                    _logger.LogError(ex, "Product order confirmation failed");
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

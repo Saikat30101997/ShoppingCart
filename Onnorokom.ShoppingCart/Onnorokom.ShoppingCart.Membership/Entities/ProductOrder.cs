@@ -11,11 +11,12 @@ namespace Onnorokom.ShoppingCart.Membership.Entities
     {
         public int Id { get; set; }
         public Guid UserId { get; set; }
-        public int ProductId { get; set; }
         public string UserEmail { get; set; }
+        public int ProductId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime DeliveryDate { get; set; }
         public string OrderStatus { get; set; }
         public int Quantity { get; set; }
+        public double TotalPrice { get; set; }
     }
 }
