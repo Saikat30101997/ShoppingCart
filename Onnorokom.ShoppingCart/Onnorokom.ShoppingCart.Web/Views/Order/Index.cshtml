@@ -22,8 +22,8 @@
                         "orderable": false,
                         "targets": 6,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-success btn-sm" onclick="window.location.href='/order/cancelproductorder/${data}'" value='${data}'>
-                                                        Accept
+                            return `<button type="submit" class="btn btn-danger btn-sm" onclick="window.location.href='/order/cancelproductorder/${data}'" value='${data}'>
+                                                        Cancel Order
                                                     </button>`
                         }
                     }
@@ -33,26 +33,14 @@
     </script>
 }
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Your Orders</h1>
-            </div>
-            <div class="col-sm-6">
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
-
-<section class="content">
+<section class="content" style="padding-left:200px;padding-right:200px;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Orders</h3>
+                        <h3 class="card-title">Your Orders</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

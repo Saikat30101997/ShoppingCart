@@ -16,5 +16,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         void AcceptProductOrder(int id, DateTime DeliveryDate);
         (IList<ProductOrder> records, int total, int totalDisplay) GetProductOrdersForUser(Guid userId, int pageIndex, int pageSize,
             string searchText, string sortText);
+        void Reject(int id);
+        void Remove(int id);
     }
 }

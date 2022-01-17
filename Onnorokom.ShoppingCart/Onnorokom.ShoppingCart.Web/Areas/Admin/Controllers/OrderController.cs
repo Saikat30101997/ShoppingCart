@@ -63,5 +63,12 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult RejectProductOrder(int id)
+        {
+            var model = _scope.Resolve<OrderListModel>();
+            model.RejectProductOrder(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

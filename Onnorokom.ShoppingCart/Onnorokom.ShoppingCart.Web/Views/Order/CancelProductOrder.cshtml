@@ -1,0 +1,45 @@
+﻿@model Onnorokom.ShoppingCart.Web.Models.Orders.OrderModel
+@{
+    ViewData["Title"] = "CancelProductOrder";
+}
+
+<section class="col-md-10 offset-md-2" style="padding-top:20px;padding-left:150px;padding-right:200px">
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body">
+
+                            @if (Model.Flag == 1)
+                            {
+                                <h3 class="card-text">
+                                    You can not cancel this order because product is confirmed
+                                </h3>
+                                <a asp-controller="Order" asp-action="Index" class="btn btn-primary">Back</a>
+                            }
+                            else if (Model.Flag == 2)
+                            {
+                                <h3 class="card-text">
+                                    Your Order is Rejected
+                                </h3>
+                                <a asp-controller="Order" asp-action="Index" class="btn btn-primary">Back</a>
+                            }
+                            else
+                            {
+                                <h3 class="card-text">
+                                    You Can not Cancel this Product because product is confirmed
+                                </h3>
+                                <a asp-controller="Order" asp-action="CancelOrder" class="btn btn-primary">Cancel Order</a>
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

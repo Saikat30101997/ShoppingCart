@@ -49,6 +49,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             _shoppingCartUnitOfWork.ProductOrders.Add(
                 _mapper.Map<Entities.ProductOrder>(productOrder));
 
+
             _shoppingCartUnitOfWork.Save();
         }
 
@@ -112,6 +113,24 @@ namespace Onnorokom.ShoppingCart.Membership.Services
                 data = orderData.AsQueryable().OrderBy(sortText).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
             return (data, data.Count, orderData.Count);
+        }
+
+        public void Reject(int id)
+        {
+            var productEntity = _shoppingCartUnitOfWork.ProductOrders.GetById(id);
+
+            if (productEntity != null)
+            {
+                productEntity.OrderStatus = "Rejected";
+                _shoppingCartUnitOfWork.Save();
+            }
+        }
+
+        public void Remove(int id)
+        {
+            _shoppingCartUnitOfWork.ProductOrders.GetById(id);
+
+            _shoppingCartUnitOfWork.Save();
         }
     }
 }

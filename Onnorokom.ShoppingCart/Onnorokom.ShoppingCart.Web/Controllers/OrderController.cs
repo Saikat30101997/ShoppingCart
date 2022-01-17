@@ -76,5 +76,20 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
 
             return View(model);
         }
+
+        public IActionResult CancelProductOrder(int id)
+        {
+            var model = _scope.Resolve<OrderModel>();
+            model.CancelProductOrder(id);
+            return View(model);
+        }
+
+        public IActionResult CancelOrder(int id)
+        {
+            var model = _scope.Resolve<OrderModel>();
+            model.RemoveOrder(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

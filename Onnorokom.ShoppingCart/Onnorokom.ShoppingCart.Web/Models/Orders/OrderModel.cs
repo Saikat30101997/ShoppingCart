@@ -23,6 +23,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
         public DateTime? DeliveryDate { get; set; }
         public string OrderStatus { get; set; }
         [Required]
+        [Range(1,4)]
         public int Quantity { get; set; }
         public string ImageName { get; set; }
         public string Name { get; set; }
@@ -30,6 +31,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
         public int CategoryId { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+        public int Flag { get; set; } = 0;
 
         public OrderModel()
         {
@@ -108,5 +110,20 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
             };
         }
 
+        internal void RemoveOrder(int id)
+        {
+            _productOrderService.Remove(id);
+        }
+
+        internal void CancelProductOrder(int id)
+        {
+            var productOrder = _productOrderService.GetOrder(id);
+
+            if (productOrder.OrderStatus == "Confirmed" )
+                Flag = 1;
+            if (productOrder.OrderStatus == "Rejected")
+                Flag = 2;
+
+        }
     }
 }

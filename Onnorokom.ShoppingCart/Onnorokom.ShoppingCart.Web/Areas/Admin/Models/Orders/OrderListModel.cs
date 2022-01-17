@@ -67,7 +67,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders
 
         internal void RejectProductOrder(int id)
         {
-            throw new NotImplementedException();
+            _productOrderService.Reject(id);
         }
     }
 }
