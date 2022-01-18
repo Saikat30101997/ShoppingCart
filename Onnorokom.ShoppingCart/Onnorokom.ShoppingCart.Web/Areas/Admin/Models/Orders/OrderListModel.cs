@@ -38,7 +38,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders
                 tableModel.PageIndex,
                 tableModel.PageSize,
                 tableModel.SearchText,
-                tableModel.GetSortText(new string[] { "UserEmail", "ProductName", "OrderDate", "DeliveryDate","OrderStatus","Quantity","TotalPrice" }));
+                tableModel.GetSortText(new string[] { "UserEmail", "ProductName", "OrderDate", "DeliveryDate","OrderStatus","Quantity","TotalPrice","PaymentStatus" }));
 
             return new
             {
@@ -54,6 +54,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders
                             record.OrderStatus,
                             record.Quantity.ToString(),
                             record.TotalPrice.ToString(),
+                            record.PaymentStatus,
                             record.Id.ToString()
                         }
                     ).ToArray()

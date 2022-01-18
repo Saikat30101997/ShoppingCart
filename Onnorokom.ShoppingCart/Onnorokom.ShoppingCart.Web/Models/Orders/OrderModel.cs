@@ -22,8 +22,8 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
         public DateTime? OrderDate { get; set; }
         public DateTime? DeliveryDate { get; set; }
         public string OrderStatus { get; set; }
-        [Required]
-        [Range(1,4)]
+        [Required(ErrorMessage = "Quantity is required")]
+        [Range(1,4,ErrorMessage = "Quantity must be 1 to 4")]
         public int Quantity { get; set; }
         public string ImageName { get; set; }
         public string Name { get; set; }
@@ -32,6 +32,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
         public string Description { get; set; }
         public double Price { get; set; }
         public int Flag { get; set; } = 0;
+        public string PaymentStatus { get; set; }
 
         public OrderModel()
         {
@@ -65,6 +66,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
                 OrderStatus = "Pending",
                 ProductId = productId,
                 Quantity = Quantity,
+                PaymentStatus = "Cash On Delivery"
             };
 
             _productOrderService.Create(productOrder);
@@ -79,7 +81,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
             Price = product.Price;
             ImageName = product.ImageName;
             Name = product.Name;
-
+            PaymentStatus = "Cash On Delivery";
         }
 
         internal object GetOrderDataForUser(DataTablesAjaxRequestModel tableModel,Guid userId)
@@ -89,7 +91,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
                tableModel.PageIndex,
                tableModel.PageSize,
                tableModel.SearchText,
-               tableModel.GetSortText(new string[] { "ProductName", "OrderDate", "DeliveryDate", "OrderStatus", "Quantity", "TotalPrice" }));
+               tableModel.GetSortText(new string[] { "ProductName", "OrderDate", "DeliveryDate", "OrderStatus", "Quantity", "TotalPrice","PaymentStatus" }));
 
             return new
             {
@@ -104,6 +106,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
                             record.OrderStatus,
                             record.Quantity.ToString(),
                             record.TotalPrice.ToString(),
+                            record.PaymentStatus,
                             record.Id.ToString()
                         }
                     ).ToArray()
@@ -125,7 +128,6 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
                 Flag = 2;
             if (productOrder.OrderStatus == "Pending")
                 Flag = 3;
-
         }
     }
 }

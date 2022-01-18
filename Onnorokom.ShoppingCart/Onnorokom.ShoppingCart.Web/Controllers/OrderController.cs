@@ -74,7 +74,7 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
                 }
             }
 
-            return View(model);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult CancelProductOrder(int id)

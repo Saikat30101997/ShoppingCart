@@ -20,7 +20,7 @@
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": 7,
+                        "targets": 8,
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-success btn-sm" onclick="window.location.href='/admin/order/acceptproductorder/${data}'" value='${data}'>
                                                         Accept
@@ -69,6 +69,7 @@
                                     <th>Order Status</th>
                                     <th>Quantity</th>
                                     <th>TotalPrice</th>
+                                    <th>Payment Status</th>
                                     <th style="width:150px">Action</th>
                                 </tr>
                             </thead>
@@ -81,6 +82,7 @@
                                     <th>Order Status</th>
                                     <th>Quantity</th>
                                     <th>TotalPrice</th>
+                                    <th>Payment Status</th>
                                     <th style="width:150px">Action</th>
                                 </tr>
                             </tfoot>

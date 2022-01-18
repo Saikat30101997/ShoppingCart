@@ -8,42 +8,41 @@
     <p class="login-box-msg">Register a new membership</p>
 
     <form asp-controller="Account" asp-action="Register" method="post" asp-antiforgery="true">
-        <div asp-validation-summary="All"></div>
         <div class="input-group mb-3">
             <input type="email" class="form-control" asp-for="Email" placeholder="Email" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span asp-validation-for="Email" class="fas fa-envelope"></span>
+                    <span class="fas fa-envelope"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter a Email.
                 </div>
             </div>
-
+            <span asp-validation-for="Email"></span>
         </div>
         <div class="input-group mb-3">
             <input type="password" class="form-control" asp-for="Password" placeholder="Password" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span asp-validation-for="Password" class="fas fa-lock"></span>
+                    <span  class="fas fa-lock"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter a Password.
                 </div>
             </div>
-
+            <span asp-validation-for="Password"></span>
         </div>
         <div class="input-group mb-3">
             <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Retype password" required>
             <div class="input-group-append">
-                <div class="input-group-text">
-                    <span asp-validation-for="ConfirmPassword" class="fas fa-lock"></span>
+                <div class="input-group-text" >
+                    <span class="fas fa-lock"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter Confirm Password.
                 </div>
             </div>
-
+            <span asp-validation-for="ConfirmPassword"></span>
         </div>
         <div class="row">
             <div class="col-8">

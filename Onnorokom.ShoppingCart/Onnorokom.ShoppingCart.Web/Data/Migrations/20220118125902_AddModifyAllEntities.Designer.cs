@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Onnorokom.ShoppingCart.Membership.Contexts;
 
-namespace Onnorokom.ShoppingCart.Web.Data.Migrations
+namespace Onnorokom.ShoppingCart.Web.Migrations.ShoppingCartDb
 {
     [DbContext(typeof(ShoppingCartDbContext))]
-    partial class ShoppingCartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220118125902_AddModifyAllEntities")]
+    partial class AddModifyAllEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,9 +102,6 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                     b.Property<string>("OrderStatus")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -168,6 +167,8 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("Stocks");
                 });
 
@@ -178,6 +179,17 @@ namespace Onnorokom.ShoppingCart.Web.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Stock", b =>
+                {
+                    b.HasOne("Onnorokom.ShoppingCart.Membership.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Onnorokom.ShoppingCart.Membership.Entities.Category", b =>
