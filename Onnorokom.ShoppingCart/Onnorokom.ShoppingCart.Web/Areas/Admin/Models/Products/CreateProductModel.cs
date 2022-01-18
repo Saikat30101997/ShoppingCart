@@ -21,11 +21,12 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
         [Required(ErrorMessage = "Price is Required")]
         public double Price { get; set; }
         public string ImageName { get; set; }
-        [Required(ErrorMessage = "Category Name must be required")]
-        [StringLength(100, MinimumLength = 5,ErrorMessage = "Category name must be between 5 to 100 characters")]
-        public string CategoryName { get; set; }
         [Required(ErrorMessage = "Image is required")]
         public IFormFile ImageFile { get; set; }
+        [Required(ErrorMessage = "Description is required")]
+        [StringLength(1000,MinimumLength = 10, ErrorMessage = "Description must be 30 to 1000 characters")]
+        public string Description { get; set; }
+        public int CategoryId { get; set; }
         private IProductService _productService;
         private ILifetimeScope _scope;
         private IMapper _mapper;
@@ -52,8 +53,9 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
 
         internal void Create()
         {
-          
+            
             var product = _mapper.Map<Product>(this);
+            product.CategoryId = CategoryId;
 
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = ImageFile.FileName;

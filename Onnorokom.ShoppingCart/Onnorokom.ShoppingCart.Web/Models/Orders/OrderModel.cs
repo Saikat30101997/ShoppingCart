@@ -82,6 +82,7 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
             ImageName = product.ImageName;
             Name = product.Name;
             PaymentStatus = "Cash On Delivery";
+            Description = product.Description;
         }
 
         internal object GetOrderDataForUser(DataTablesAjaxRequestModel tableModel,Guid userId)

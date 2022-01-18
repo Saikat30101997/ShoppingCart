@@ -50,6 +50,15 @@
                                     @Model.PaymentStatus
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">
+                                   Description
+                                </label>
+                                <div></div>
+                                <div class="col-sm-5" style="padding-left:10px;">
+                                    <p>@Model.Description</p>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <!-- /.card-footer -->
@@ -64,7 +73,7 @@
                                 <span asp-validation-for="Quantity"></span>
                             </div>
                             <button type="submit" style="padding-top:10px;" class="btn btn-info float-left">Confirm</button>
-                            <button type="submit" style="padding-top:10px;" class="btn btn-info float-right">Cancel</button>
+                            <button type="submit" style="padding-top:10px;" asp-controller="Home" asp-action="Index" class="btn btn-info float-right">Cancel</button>
                         </form>
                     </div>
                 </div>

@@ -37,10 +37,10 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        public IActionResult CreateStock()
+        public IActionResult CreateStock(int id)
         {
             var model = _scope.Resolve<CreateStockModel>();
-
+            model.ProductId = id;
             return View(model);
         }
         
@@ -58,6 +58,31 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Failed to create stock");
                     _logger.LogError(ex, "Stock Creation Failed");
+                }
+            }
+
+            return View(model);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var model = _scope.Resolve<EditStockModel>();
+            model.LoadStockModel(id);
+            return View(model);
+        }
+
+        public IActionResult Edit(EditStockModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    model.Update();
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Stock is not edited");
+                    _logger.LogError(ex, "Stock Edition Failed");
                 }
             }
 

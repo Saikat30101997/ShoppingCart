@@ -37,9 +37,10 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             return Json(data);
         }
 
-        public IActionResult CreateProduct()
+        public IActionResult CreateProduct(int id)
         {
             var model = _scope.Resolve<CreateProductModel>();
+            model.CategoryId = id;
             return View(model);
         }
 

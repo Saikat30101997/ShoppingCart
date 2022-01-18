@@ -13,8 +13,9 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form class="form-horizontal needs-validation" enctype="multipart/form-data" method="post" asp-controller="Product"
+                    <form class="form-horizontal" enctype="multipart/form-data" method="post" asp-controller="Product"
                           asp-action="CreateProduct" asp-antiforgery="true">
+                        <input asp-for="CategoryId" type="hidden"/>
                         <div class="card-body">
                             <div class="form-group row">
                                 <label asp-for="Name" class="col-sm-2 col-form-label">Name</label>
@@ -31,22 +32,22 @@
                                 </label>
                                 <div></div>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" asp-for="Price" id="price"
+                                    <input type="text" class="form-control" asp-for="Price" id="price"
                                            placeholder="Product Price" required>
                                     <span asp-validation-for="Price" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label asp-for="CategoryName" class="col-sm-2 col-form-label">
-                                    Category Name
-                                </label>
-                                <div></div>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" asp-for="CategoryName" id="categoryName"
-                                           placeholder="Category Name" required>
-                                    <span asp-validation-for="CategoryName" class="text-danger"></span>
-                                </div>
-                            </div>
+                            @*<div class="form-group row">
+            <label asp-for="CategoryName" class="col-sm-2 col-form-label">
+                Category Name
+            </label>
+            <div></div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" asp-for="CategoryName" id="categoryName"
+                       placeholder="Category Name" required>
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+        </div>*@
                             <div class="form-group row">
                                 <label asp-for="ImageFile" class="col-sm-2 col-form-label">
                                     Image
@@ -58,6 +59,17 @@
                                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                            
+                                <label asp-for="Description" class="col-sm-2 col-form-label">Description</label>
+                                
+                                <div></div>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" asp-for="Description" placeholder="Enter ..."></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

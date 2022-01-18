@@ -12,5 +12,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         void Create(Stock stock);
         (IList<Stock>records, int total, int totalDisplay) Stocks(int pageIndex, 
             int pageSize, string searchText, string sortText);
+        Stock GetStock(int id);
+        void Update(Stock stock);
     }
 }

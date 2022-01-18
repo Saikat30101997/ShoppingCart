@@ -218,5 +218,99 @@ namespace Onnorokom.ShoppingCart.Web.Controllers.Account
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                {
+                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                var callbackUrl = Url.Action("ResetPassword","Account",
+                    values: new {Code= code,Email = user.Email },
+                    protocol: Request.Scheme);
+
+                _emailService.SendEmail(model.Email, "Reset Password Email",
+                      $"Please <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+            }
+
+            return View(model);
+        }
+
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code, string email)
+        {
+            if (code == null)
+            {
+                return BadRequest("A code must be supplied for password reset.");
+            }
+            else
+            {
+                var model = new ResetPasswordModel
+                {
+                    Email = email,
+                    Code = code
+                };
+
+                return View(model);
+            }
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+                RedirectToAction(nameof(ResetPasswordConfirmation));
+
+            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Code));
+            var result = await _userManager.ResetPasswordAsync(user,
+              code, model.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+
+                return View();
+            }
+
+            return RedirectToAction(nameof(ResetPasswordConfirmation));
+        }
+
+        [HttpGet]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
     }
 }

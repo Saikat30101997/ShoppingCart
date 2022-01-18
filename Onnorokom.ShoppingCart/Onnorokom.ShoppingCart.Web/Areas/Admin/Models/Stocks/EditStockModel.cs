@@ -10,22 +10,25 @@ using System.Threading.Tasks;
 
 namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Stocks
 {
-    public class CreateStockModel
+    public class EditStockModel
     {
+        public int Id { get; set; }
         [Required]
-        [Range(1,100 , ErrorMessage = "Quantity must be between 1 to 100")]
+        [Range(1, 100, ErrorMessage = "Quantity must be between 1 to 100")]
         public int Quantity { get; set; }
+        [Required]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Product Name must be between 3 to 100 characters")]
+        public string ProductName { get; set; }
         private IStockService _stockService;
         private ILifetimeScope _scope;
         private IMapper _mapper;
-        public int ProductId { get; set; }
 
-        public CreateStockModel()
+        public EditStockModel()
         {
 
         }
 
-        public CreateStockModel(IStockService stockService,IMapper mapper)
+        public EditStockModel(IStockService stockService, IMapper mapper)
         {
             _stockService = stockService;
             _mapper = mapper;
@@ -38,12 +41,20 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Stocks
             _mapper = _scope.Resolve<IMapper>();
         }
 
-        internal void Create()
+        internal void LoadStockModel(int id)
+        {
+            var stock = _stockService.GetStock(id);
+
+            Id = stock.Id;
+            Quantity = stock.Quantity;
+            ProductName = stock.ProductName;
+        }
+
+        internal void Update()
         {
             var stock = _mapper.Map<Stock>(this);
-            stock.ProductId = ProductId;
 
-            _stockService.Create(stock);
+            _stockService.Update(stock);
         }
     }
 }

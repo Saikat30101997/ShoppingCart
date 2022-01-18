@@ -21,6 +21,7 @@ namespace Onnorokom.ShoppingCart.Web.Profiles
             CreateMap<BO.Product, EditProductModel>().ReverseMap();
             CreateMap<BO.Stock, CreateStockModel>().ReverseMap();
             CreateMap<BO.Purchase, CreatePurchaseModel>().ReverseMap();
+            CreateMap<BO.Stock, EditStockModel>().ReverseMap();
         }
     }
 }

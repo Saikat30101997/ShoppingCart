@@ -25,7 +25,10 @@
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
                                                 Edit
-                                            </button>`
+                                            </button>
+                                    <button type="submit" class="btn btn-default btn-sm" onclick="window.location.href='/admin/product/createproduct/${data}'" value='${data}'>
+                                                Add Product
+                                                </button>`
                         }
                     }
                 ]

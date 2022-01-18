@@ -30,14 +30,14 @@
                         "targets": 4,
                         "render": function (data, type, row) {
                             return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/product/editproduct/${data}'" value='${data}'>
-                                                        <i class="fas fa-pencil-alt">
-                                                        </i>
+                                                      
                                                         Edit
                                                     </button>
-                                                    <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                                        <i class="fas fa-trash">
-                                                        </i>
+                                   <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
                                                         Delete
+                                                    </button>
+                                   <button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/stock/createstock/${data}'" value='${data}'>
+                                                        Add Stock
                                                     </button>`;
                         }
                     }
@@ -91,7 +91,7 @@
                                     <th>Category Name</th>
                                     <th>Price</th>
                                     <th style="width:50px;">Image</th>
-                                    <th style="width:150px">Action</th>
+                                    <th style="width:200px">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -100,7 +100,7 @@
                                     <th>Category Name</th>
                                     <th>Price</th>
                                     <th>Image</th>
-                                    <th style="width:150px">Action</th>
+                                    <th style="width:200px">Action</th>
                                 </tr>
                             </tfoot>
                         </table>
