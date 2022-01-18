@@ -13,7 +13,7 @@
     <script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function () {
-            $('#products').DataTable({
+            $('#carts').DataTable({
                 "processing": true,
                 "serverSide": true,
                 "ajax": "/Cart/GetCartData",
@@ -28,7 +28,7 @@
                                                             Order
                                                         </button>
                                                         <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                                            <i class="fas fa-trash">
+                                                            <i>
                                                             </i>
                                                             Delete
                                                         </button>`;
@@ -36,7 +36,7 @@
                     }
                 ]
             });
-            $('#products').on('click', '.show-bs-modal', function (event) {
+            $('#carts').on('click', '.show-bs-modal', function (event) {
                 var id = $(this).data("id");
                 var modal = $("#modal-default");
                 modal.find('.modal-body p').text('Are you sure you want to delete this record?')
@@ -76,7 +76,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="products" class="table table-bordered table-hover">
+                        <table id="carts" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
@@ -92,7 +92,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        @*<partial name="_DeletePopUpPartial" />*@
+                        <partial name="_DeletePopUpPartial" />
                     </div>
                     <!-- /.card-body -->
                 </div>

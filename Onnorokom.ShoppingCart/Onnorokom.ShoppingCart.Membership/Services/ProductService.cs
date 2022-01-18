@@ -30,10 +30,21 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             product.CategoryId = categoryId;
 
-            _shoppingCartUnitOfWork.Products.Add(
-              _mapper.Map<Entities.Product>(product));
+            categoryentity = null;
 
-            _shoppingCartUnitOfWork.Save();
+            if (product != null)
+            {
+                _shoppingCartUnitOfWork.Products.Add(
+                  new Entities.Product
+                  {
+                      Name = product.Name,
+                      CategoryId = product.CategoryId,
+                      Price = product.Price,
+                      ImageName = product.ImageName,
+                  });
+
+                _shoppingCartUnitOfWork.Save();
+            }
         }
 
         public Product GetProduct(int id)
@@ -82,6 +93,15 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             var productBO = (from product in productEntities
              select _mapper.Map<Product>(product)).ToList();
+
+            foreach (var product in productBO)
+            {
+                var stock = _shoppingCartUnitOfWork.Stocks.Get(x => x.ProductId == product.Id, string.Empty);
+                if (stock.Count == 0 || stock[0].Quantity<=0)
+                    product.StockMessage = "Stock Out";
+                else
+                    product.StockMessage = "Stock In";
+            }
 
             return productBO;
         }

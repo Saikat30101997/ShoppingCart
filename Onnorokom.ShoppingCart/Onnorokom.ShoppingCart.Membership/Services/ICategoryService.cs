@@ -13,5 +13,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         (IList<Category>records, int total,int totalDisplay) GetCategories(int pageIndex, 
             int pageSize, string searchText, string sortText);
         bool IsCategoryAlreadyCreated(string name);
+        Category GetCategory(int id);
+        void Update(Category category);
     }
 }

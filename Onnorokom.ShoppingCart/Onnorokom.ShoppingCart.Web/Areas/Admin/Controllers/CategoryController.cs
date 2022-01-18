@@ -69,5 +69,34 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var model = _scope.Resolve<EditCategoryModel>();
+            model.LoadCategoryData(id);
+
+            return View(model);
+        }
+
+        [HttpPost,ValidateAntiForgeryToken]
+        public IActionResult Edit(EditCategoryModel model)
+        {
+            model.Resolve(_scope);
+
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    model.Edit();
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "Failed to edit Category");
+                    _logger.LogError(ex, "Category edition Failed");
+                }
+            }
+
+            return View(model);
+        }
     }
 }

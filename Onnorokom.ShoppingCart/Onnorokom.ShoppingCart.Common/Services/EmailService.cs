@@ -12,12 +12,12 @@ namespace Onnorokom.ShoppingCart.Common.Services
 {
     public class EmailService : IEmailService
     {
-
         private ConfirmationEmailSettings _confirmationEmailSettings;
         public EmailService(IOptions<ConfirmationEmailSettings> confirmationEmailSettings)
         {
             _confirmationEmailSettings = confirmationEmailSettings.Value;
         }
+        
         public void SendEmail(string receiver, string subject, string body)
         {
             var message = new MimeMessage();
@@ -33,7 +33,6 @@ namespace Onnorokom.ShoppingCart.Common.Services
             using var client = new SmtpClient();
             client.Timeout = 60000;
             client.Connect(_confirmationEmailSettings.host, _confirmationEmailSettings.port, _confirmationEmailSettings.useSSL);
-
 
             // Note: only needed if the SMTP server requires authentication
             client.Authenticate(_confirmationEmailSettings.username, _confirmationEmailSettings.password);

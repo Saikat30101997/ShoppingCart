@@ -58,5 +58,14 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
             else
                 return RedirectToAction("Index","Home");
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var model = _scope.Resolve<CartModel>();
+            model.Remove(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

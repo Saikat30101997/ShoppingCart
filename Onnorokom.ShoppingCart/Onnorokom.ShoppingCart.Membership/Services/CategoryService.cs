@@ -43,6 +43,13 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             return (data, categoryListData.total, categoryListData.totalDisplay);
         }
 
+        public Category GetCategory(int id)
+        {
+            var category = _shoppingCartUnitOfWork.Categories.GetById(id);
+
+            return _mapper.Map<Category>(category);
+        }
+
         public bool IsCategoryAlreadyCreated(string name)
         {
             int count = _shoppingCartUnitOfWork.Categories.GetCount(x => x.Name == name);
@@ -51,6 +58,20 @@ namespace Onnorokom.ShoppingCart.Membership.Services
                 return true;
             else
                 return false;
+        }
+
+        public void Update(Category category)
+        {
+            var categoryEntity = _shoppingCartUnitOfWork.Categories.GetById(category.Id);
+
+            if (categoryEntity != null)
+            {
+                _mapper.Map(category, categoryEntity);
+
+                _shoppingCartUnitOfWork.Save();
+            }
+            else
+                throw new InvalidOperationException("Category is not found");
         }
     }
 }

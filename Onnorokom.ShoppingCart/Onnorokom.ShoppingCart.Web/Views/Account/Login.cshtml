@@ -13,7 +13,7 @@
             <input type="email" asp-for="Email" class="form-control" placeholder="Email" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
+                    <span asp-validation-for="Email" class="fas fa-envelope"></span>
                 </div>
             </div>
             <div id="validationemail" class="invalid-feedback">
@@ -24,7 +24,7 @@
             <input type="password" asp-for="Password" class="form-control" placeholder="Password" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                    <span asp-validation-for="Password" class="fas fa-lock"></span>
                 </div>
             </div>
             <div class="invalid-feedback">

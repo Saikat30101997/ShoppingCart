@@ -62,7 +62,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Create</button>
+                            <button type="submit" class="btn btn-info">Edit</button>
                             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-default float-right">Cancel</a>
                         </div>
                         <!-- /.card-footer -->
@@ -74,4 +74,8 @@
 </section>
 
 
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
 

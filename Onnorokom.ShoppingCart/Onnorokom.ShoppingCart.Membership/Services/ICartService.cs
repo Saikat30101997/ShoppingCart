@@ -14,5 +14,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             int pageSize, string searchText, string sortText);
         Cart GetCart(int id);
         void RemoveCart(Guid userId, int productId);
+        void Remove(int id);
     }
 }

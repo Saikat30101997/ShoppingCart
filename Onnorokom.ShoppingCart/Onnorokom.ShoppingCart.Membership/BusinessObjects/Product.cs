@@ -15,5 +15,7 @@ namespace Onnorokom.ShoppingCart.Membership.BusinessObjects
         public string Description { get; set; }
         public double Price { get; set; }
         public string ImageName { get; set; }
+        public int StockQuantity { get; set; }
+        public string StockMessage { get; set; }
     }
 }

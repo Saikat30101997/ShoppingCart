@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Onnorokom.ShoppingCart.Membership.BusinessObjects;
@@ -14,15 +15,15 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
 {
     public class EditProductModel
     {
-        public int? Id { get; set; }
-        [Required]
-        [StringLength(100, MinimumLength = 5)]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Product name is required")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Product Name must be 5 to 100 characters")]
         public string Name { get; set; }
-        [Required]
-        public double? Price { get; set; }
+        [Required(ErrorMessage = "Price is Required")]
+        public double Price { get; set; }
         public string ImageName { get; set; }
-        [Required]
-        [StringLength(100, MinimumLength = 5)]
+        [Required(ErrorMessage = "Category Name must be required")]
+        [StringLength(100, MinimumLength = 5, ErrorMessage = "Category name must be between 5 to 100 characters")]
         public string CategoryName { get; set; }
         [Required]
         public IFormFile ImageFile { get; set; }
@@ -30,16 +31,18 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
         private IProductService _productService;
         private ILifetimeScope _scope;
         private IWebHostEnvironment _hostEnvironment;
+        private IMapper _mapper;
 
         public EditProductModel()
         {
 
         }
 
-        public EditProductModel(IProductService productService,IWebHostEnvironment hostEnvironment)
+        public EditProductModel(IProductService productService,IWebHostEnvironment hostEnvironment,IMapper mapper)
         {
             _productService = productService;
             _hostEnvironment = hostEnvironment;
+            _mapper = mapper;
         }
 
         public void Resolve(ILifetimeScope scope)
@@ -47,28 +50,22 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
             _scope = scope;
             _productService = _scope.Resolve<IProductService>();
             _hostEnvironment = _scope.Resolve<IWebHostEnvironment>();
+            _mapper = _scope.Resolve<IMapper>();
         }
 
         internal void LoadModelData(int id)
         {
             var product = _productService.GetProduct(id);
 
-            Id = product?.Id;
+            Id = product.Id;
             Name = product.Name;
             CategoryName = product.CategoryName;
-            Price = product?.Price;
+            Price = product.Price;
         }
 
         internal void Update()
         {
-            var product = new Product
-            {
-                Id = Id.HasValue ? Id.Value : 0,
-                Name = Name,
-                CategoryName = CategoryName,
-                ImageName = ImageName,
-                Price = Price.HasValue ? Price.Value : 0
-            };
+            var product = _mapper.Map<Product>(this);
 
             string wwwRootPath = _hostEnvironment.WebRootPath;
             string fileName = ImageFile.FileName;

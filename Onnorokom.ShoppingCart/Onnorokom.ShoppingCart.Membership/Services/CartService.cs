@@ -68,6 +68,12 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             return _mapper.Map<Cart>(cart);
         }
 
+        public void Remove(int id)
+        {
+            _shoppingCartUnitOfWork.Carts.Remove(id);
+            _shoppingCartUnitOfWork.Save();
+        }
+
         public void RemoveCart(Guid userId, int productId)
         {
             var carts = _shoppingCartUnitOfWork.Carts.Get(x => x.UserId == userId && x.ProductId == productId,string.Empty);

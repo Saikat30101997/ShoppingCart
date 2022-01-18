@@ -64,5 +64,10 @@ namespace Onnorokom.ShoppingCart.Web.Models.Carts
                     ).ToArray()
             };
         }
+
+        internal void Remove(int id)
+        {
+            _cartService.Remove(id);
+        }
     }
 }

@@ -23,16 +23,9 @@
                         "orderable": false,
                         "targets": 1,
                         "render": function (data, type, row) {
-                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/dashboard/groupedit/${data}'" value='${data}'>
-                                                <i class="fas fa-pencil-alt">
-                                                </i>
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/category/edit/${data}'" value='${data}'>
                                                 Edit
-                                            </button>
-                                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" href="#" data-id='${data}' value='${data}'>
-                                                <i class="fas fa-trash">
-                                                </i>
-                                                Delete
-                                            </button>`;
+                                            </button>`
                         }
                     }
                 ]
@@ -60,7 +53,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">All Available Groups</h3>
+                        <h3 class="card-title">All Available Categories</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -74,11 +67,10 @@
                             <tfoot>
                                 <tr>
                                     <th>Category Name</th>
-                                    <th style="width:300px">Action</th>
+                                    <th style="width:50px">Action</th>
                                 </tr>
                             </tfoot>
                         </table>
-                        @*<partial name="_DeletePopUpPartial" />*@
                     </div>
                     <!-- /.card-body -->
                 </div>

@@ -13,7 +13,7 @@
             <input type="email" class="form-control" asp-for="Email" placeholder="Email" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
+                    <span asp-validation-for="Email" class="fas fa-envelope"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter a Email.
@@ -25,7 +25,7 @@
             <input type="password" class="form-control" asp-for="Password" placeholder="Password" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                    <span asp-validation-for="Password" class="fas fa-lock"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter a Password.
@@ -37,7 +37,7 @@
             <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Retype password" required>
             <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                    <span asp-validation-for="ConfirmPassword" class="fas fa-lock"></span>
                 </div>
                 <div class="invalid-feedback">
                     Please enter Confirm Password.
