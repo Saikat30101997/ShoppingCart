@@ -55,8 +55,8 @@
                                    Description
                                 </label>
                                 <div></div>
-                                <div class="col-sm-5" style="padding-left:10px;">
-                                    <p>@Model.Description</p>
+                                <div class="col-sm-5">
+                                    <p style="text-align:justify;">@Model.Description</p>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <span asp-validation-for="Quantity"></span>
                             </div>
                             <button type="submit" style="padding-top:10px;" class="btn btn-info float-left">Confirm</button>
-                            <button type="submit" style="padding-top:10px;" asp-controller="Home" asp-action="Index" class="btn btn-info float-right">Cancel</button>
+                            <a type="submit" style="padding-top:10px;" asp-controller="Home" asp-action="Index" class="btn btn-info float-right">Cancel</a>
                         </form>
                     </div>
                 </div>

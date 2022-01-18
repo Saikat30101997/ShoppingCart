@@ -23,8 +23,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
         public string ImageName { get; set; }
         [Required(ErrorMessage = "Image is required")]
         public IFormFile ImageFile { get; set; }
-        [Required(ErrorMessage = "Description is required")]
-        [StringLength(1000,MinimumLength = 10, ErrorMessage = "Description must be 30 to 1000 characters")]
+        [StringLength(1000,MinimumLength = 10, ErrorMessage = "Description must be 10 to 1000 characters")]
         public string Description { get; set; }
         public int CategoryId { get; set; }
         private IProductService _productService;

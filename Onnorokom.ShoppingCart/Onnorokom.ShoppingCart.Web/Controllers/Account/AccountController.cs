@@ -148,9 +148,9 @@ namespace Onnorokom.ShoppingCart.Web.Controllers.Account
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model )
         {
-            model.ReturnUrl ??= Url.Content("~/");
+           // model.ReturnUrl ??= Url.Content("~/");
 
             model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -167,7 +167,7 @@ namespace Onnorokom.ShoppingCart.Web.Controllers.Account
 
                     if (user != null)
                     {
-                        if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                        if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl) && model.ReturnUrl!="/")
                         {
                             return Redirect(model.ReturnUrl);
                         }

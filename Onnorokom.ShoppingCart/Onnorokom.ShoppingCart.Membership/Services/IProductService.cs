@@ -16,5 +16,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         Product GetProduct(int id);
         void Update(Product product);
         int GetProductId(string name);
+        void Delete(int id);
     }
 }

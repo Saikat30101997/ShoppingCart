@@ -25,12 +25,6 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             if (product == null)
                 throw new InvalidOperationException("Product must be provided");
 
-            //var categoryentity = _shoppingCartUnitOfWork.Categories.Get(x => x.Name == product.CategoryName,string.Empty);
-            //var categoryId = categoryentity[0].Id;
-
-            //product.CategoryId = categoryId;
-
-           // categoryentity = null;
 
             if (product != null)
             {
@@ -46,6 +40,13 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
                 _shoppingCartUnitOfWork.Save();
             }
+        }
+
+        public void Delete(int id)
+        {
+            _shoppingCartUnitOfWork.Products.Remove(id);
+
+            _shoppingCartUnitOfWork.Save();
         }
 
         public Product GetProduct(int id)

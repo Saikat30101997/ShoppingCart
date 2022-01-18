@@ -27,6 +27,8 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
         public string CategoryName { get; set; }
         [Required]
         public IFormFile ImageFile { get; set; }
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "Description must be 10 to 1000 characters")]
+        public string Description { get; set; }
 
         private IProductService _productService;
         private ILifetimeScope _scope;
@@ -61,6 +63,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
             Name = product.Name;
             CategoryName = product.CategoryName;
             Price = product.Price;
+            Description = product.Description;
         }
 
         internal void Update()

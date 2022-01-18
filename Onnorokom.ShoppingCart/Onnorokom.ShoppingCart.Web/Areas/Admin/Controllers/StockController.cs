@@ -71,8 +71,10 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+       [HttpPost,ValidateAntiForgeryToken]
         public IActionResult Edit(EditStockModel model)
         {
+            model.Resolve(_scope);
             if(ModelState.IsValid)
             {
                 try
