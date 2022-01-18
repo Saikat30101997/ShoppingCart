@@ -24,11 +24,19 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         public void AcceptProductOrder(int id,DateTime DeliveryDate)
         {
             var productEntity = _shoppingCartUnitOfWork.ProductOrders.GetById(id);
+            var stock = _shoppingCartUnitOfWork.Stocks.Get(x => x.ProductId == productEntity.ProductId,string.Empty);
 
             if (productEntity != null)
             {
                 productEntity.OrderStatus = "Confirmed";
                 productEntity.DeliveryDate = DeliveryDate;
+
+                if(stock!=null)
+                {
+                    stock[0].Id = stock[0].Id;
+                    if (stock[0].Quantity > 0)
+                        stock[0].Quantity -= 1;
+                }
                 _shoppingCartUnitOfWork.Save();
             }
             else
@@ -128,7 +136,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
         public void Remove(int id)
         {
-            _shoppingCartUnitOfWork.ProductOrders.GetById(id);
+            _shoppingCartUnitOfWork.ProductOrders.Remove(id);
 
             _shoppingCartUnitOfWork.Save();
         }

@@ -81,7 +81,14 @@ namespace Onnorokom.ShoppingCart.Web.Controllers
         {
             var model = _scope.Resolve<OrderModel>();
             model.CancelProductOrder(id);
-            return View(model);
+            if (model.Flag == 3) 
+            {
+                model.RemoveOrder(id);
+                TempData["Status"] = "Cancel";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+               return View(model);
         }
 
         public IActionResult CancelOrder(int id)

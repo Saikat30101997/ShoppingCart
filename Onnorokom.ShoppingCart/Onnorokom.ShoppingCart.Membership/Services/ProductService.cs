@@ -31,12 +31,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             product.CategoryId = categoryId;
 
             _shoppingCartUnitOfWork.Products.Add(
-                new Entities.Product
-                {
-                    CategoryId = product.CategoryId,
-                    ImageName = product.ImageName,
-                    Price = product.Price
-                });
+              _mapper.Map<Entities.Product>(product));
 
             _shoppingCartUnitOfWork.Save();
         }

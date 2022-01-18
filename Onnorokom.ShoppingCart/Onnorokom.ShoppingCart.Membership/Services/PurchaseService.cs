@@ -32,5 +32,17 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             _shoppingCartUnitOfWork.Save();
         }
+
+        public (IList<Purchase> records, int total, int totalDisplay) GetPurchases(int pageIndex, 
+            int pageSize, string searchText, string sortText)
+        {
+            var purchaseData = _shoppingCartUnitOfWork.Purchases.GetDynamic(string.IsNullOrWhiteSpace(searchText) ? null : x => x.ProductName.Contains(searchText),
+                sortText, string.Empty, pageIndex, pageSize);
+
+            var result = (from purchase in purchaseData.data
+                          select _mapper.Map<Purchase>(purchase)).ToList();
+
+            return (result, purchaseData.total, purchaseData.totalDisplay);
+        }
     }
 }

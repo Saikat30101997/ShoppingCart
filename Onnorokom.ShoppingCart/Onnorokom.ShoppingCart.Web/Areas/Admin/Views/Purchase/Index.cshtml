@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+}
+@section Scripts
+{
+    <script src="/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(function () {
+            $('#purchases').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "/Admin/Purchase/GetPurchaseData"
+            });
+        });
+    </script>
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>All Orders</h1>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Orders</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="purchases" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Seller Name</th>
+                                    <th>Purchase Date</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>TotalPrice</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Seller Name</th>
+                                    <th>Purchase Date</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>TotalPrice</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content-wrapper -->

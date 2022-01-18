@@ -10,5 +10,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
     public interface IPurchaseService
     {
         void Create(Purchase purchase);
+        (IList<Purchase>records,int total, int totalDisplay) GetPurchases(int pageIndex, 
+            int pageSize, string searchText, string sortText);
     }
 }

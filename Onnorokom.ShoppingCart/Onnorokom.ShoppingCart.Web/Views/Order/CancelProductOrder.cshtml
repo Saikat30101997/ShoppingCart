@@ -1,6 +1,6 @@
 ﻿@model Onnorokom.ShoppingCart.Web.Models.Orders.OrderModel
 @{
-    ViewData["Title"] = "CancelProductOrder";
+    ViewData["Title"] = "Cancel Product Order";
 }
 
 <section class="col-md-10 offset-md-2" style="padding-top:20px;padding-left:150px;padding-right:200px">
@@ -28,13 +28,11 @@
                             else
                             {
                                 <h3 class="card-text">
-                                    You Can not Cancel this Product because product is confirmed
+                                    Are you Sure? You want to cancel your order
                                 </h3>
                                 <a asp-controller="Order" asp-action="CancelOrder" class="btn btn-primary">Cancel Order</a>
+                                <input asp-for="Id" type="hidden"/>
                             }
-
-
-
                         </div>
                     </div>
                 </div>

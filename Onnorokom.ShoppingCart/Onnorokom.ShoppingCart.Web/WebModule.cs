@@ -36,6 +36,7 @@ namespace Onnorokom.ShoppingCart.Web
             builder.RegisterType<CreateStockModel>().AsSelf();
             builder.RegisterType<StockListModel>().AsSelf();
             builder.RegisterType<CreatePurchaseModel>().AsSelf();
+            builder.RegisterType<PurchaseModelList>().AsSelf();
 
             base.Load(builder);
         }

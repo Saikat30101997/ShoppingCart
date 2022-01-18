@@ -123,6 +123,8 @@ namespace Onnorokom.ShoppingCart.Web.Models.Orders
                 Flag = 1;
             if (productOrder.OrderStatus == "Rejected")
                 Flag = 2;
+            if (productOrder.OrderStatus == "Pending")
+                Flag = 3;
 
         }
     }

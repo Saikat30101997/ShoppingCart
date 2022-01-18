@@ -35,7 +35,7 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Products
               tableModel.PageIndex,
               tableModel.PageSize,
               tableModel.SearchText,
-              tableModel.GetSortText(new string[] { "Name","CategoryName","Price","Image Name" }));
+              tableModel.GetSortText(new string[] { "Name","CategoryName","Price","ImageName" }));
 
             return new
             {
