@@ -1,6 +1,6 @@
 # ShoppingCart
 
-1. In First, You do not see any product card in home page because any product is not created. So first login with Admin    account. Admin account email and password is given in AdminDataSeed. It is in Onnorokom.ShoppingCart.Membership
+1. In First, You do not see any product card in home page because any product is not created. So first login with Admin    account. Admin account email and password is given in AdminDataSeed. It is in Onnorokom.ShoppingCart.Membership.Seeds
 2. First create category
 3. go to category list then create product in this category
 4. after create you can see product in home page
