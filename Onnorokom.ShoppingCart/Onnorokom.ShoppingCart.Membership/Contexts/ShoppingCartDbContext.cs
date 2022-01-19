@@ -18,6 +18,7 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
             _connectionString = connectionString;
             _migrationAssemblyName = migrationAssemblyName;
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
         {
             if (!dbContextOptionsBuilder.IsConfigured)
@@ -29,6 +30,22 @@ namespace Onnorokom.ShoppingCart.Membership.Contexts
 
             base.OnConfiguring(dbContextOptionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)  //fluent api
+        {
+            modelBuilder.Entity<ApplicationUser>()
+                .ToTable("AspNetUsers", t => t.ExcludeFromMigrations())
+                .HasMany<Cart>()
+                .WithOne(a => a.User);
+
+            modelBuilder.Entity<ApplicationUser>()
+              .ToTable("AspNetUsers", t => t.ExcludeFromMigrations())
+              .HasMany<ProductOrder>()
+              .WithOne(a => a.User);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }

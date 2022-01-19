@@ -30,8 +30,9 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             foreach (var cart in cartData)
             {
-                var products = _shoppingCartUnitOfWork.Products.Get(x => x.Id == cart.ProductId,string.Empty);
-                cart.ProductName = products[0].Name;
+                var product = _shoppingCartUnitOfWork.Products.GetById(cart.ProductId); 
+                if(product!=null)
+                    cart.ProductName = product.Name;
             }
 
             if (string.IsNullOrWhiteSpace(searchText) == false)

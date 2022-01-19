@@ -77,8 +77,10 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             foreach (var item in orderData)
             {
-                var product = _shoppingCartUnitOfWork.Products.Get(x => x.Id == item.ProductId,string.Empty);
-                item.ProductName = product[0].Name;
+                var product = _shoppingCartUnitOfWork.Products.GetById(item.ProductId);
+
+                if(product!=null)
+                    item.ProductName = product.Name;
             }
 
             if(string.IsNullOrWhiteSpace(searchText) == false)
@@ -104,8 +106,10 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             foreach (var item in orderData)
             {
-                var product = _shoppingCartUnitOfWork.Products.Get(x => x.Id == item.ProductId, string.Empty);
-                item.ProductName = product[0].Name;
+                var product = _shoppingCartUnitOfWork.Products.GetById(item.ProductId);
+
+                if(product!=null)
+                    item.ProductName = product.Name;
             }
 
             if (string.IsNullOrWhiteSpace(searchText) == false)

@@ -13,5 +13,6 @@ namespace Onnorokom.ShoppingCart.Membership.Entities
         public int ProductId { get; set; }
         public Guid UserId { get; set; }
         public DateTime Date { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
