@@ -9,11 +9,11 @@ namespace Onnorokom.ShoppingCart.Web.Models.Account
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

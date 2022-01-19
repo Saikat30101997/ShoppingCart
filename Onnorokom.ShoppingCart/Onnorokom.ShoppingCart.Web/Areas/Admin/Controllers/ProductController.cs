@@ -95,13 +95,5 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            var model = _scope.Resolve<ProductListModel>();
-            model.Delete(id);
-
-            return RedirectToAction(nameof(Index));
-        }
     }
 }

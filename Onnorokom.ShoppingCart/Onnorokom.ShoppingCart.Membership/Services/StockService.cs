@@ -41,7 +41,10 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             var product = _mapper.Map<Stock>(stockentity);
 
-            product.ProductName = productentity.Name;
+            if (productentity != null)
+                product.ProductName = productentity.Name;
+            else
+                product.ProductName = "NULL";
 
             return product;
         }
@@ -81,7 +84,13 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             var product = _shoppingCartUnitOfWork.Products.Get(x => x.Name == stock.ProductName, string.Empty);
 
+            if (product.Count == 0)
+                throw new InvalidOperationException("Product of this stock is not found");
+
             var stockentity = _shoppingCartUnitOfWork.Stocks.GetById(stock.Id);
+
+            if (stockentity == null)
+                throw new InvalidOperationException("Stock is not found");
 
             stock.ProductId = product[0].Id;
             if (stockentity != null)

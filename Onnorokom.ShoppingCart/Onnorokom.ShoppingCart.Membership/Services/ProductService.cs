@@ -54,6 +54,12 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             var productEntity = _shoppingCartUnitOfWork.Products.GetById(id);
             var categoryEnitity = _shoppingCartUnitOfWork.Categories.GetById(productEntity.CategoryId);
 
+            if (productEntity == null)
+                throw new InvalidOperationException("Product is not found");
+
+            if (categoryEnitity == null)
+                throw new InvalidOperationException("Category of this product is not found");
+
             var product = _mapper.Map<Product>(productEntity);
 
             product.CategoryName = categoryEnitity.Name;
@@ -118,6 +124,9 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             var categoryEntity = _shoppingCartUnitOfWork.Categories.Get(x => x.Name == product.CategoryName, string.Empty);
             product.CategoryId = categoryEntity[0].Id;
+
+            if (categoryEntity == null)
+                throw new InvalidOperationException("Category of this product is not found");
 
             if (productEntity != null)
             {

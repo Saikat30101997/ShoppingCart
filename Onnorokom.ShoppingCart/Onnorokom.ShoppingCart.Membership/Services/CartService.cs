@@ -30,9 +30,11 @@ namespace Onnorokom.ShoppingCart.Membership.Services
 
             foreach (var cart in cartData)
             {
-                var product = _shoppingCartUnitOfWork.Products.GetById(cart.ProductId); 
-                if(product!=null)
+                var product = _shoppingCartUnitOfWork.Products.GetById(cart.ProductId);
+                if (product != null)
                     cart.ProductName = product.Name;
+                else
+                    cart.ProductName = "NULL";
             }
 
             if (string.IsNullOrWhiteSpace(searchText) == false)
@@ -52,6 +54,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         {
             if (cart == null)
                 throw new InvalidOperationException("Cart is not provided");
+
             var cartData = _shoppingCartUnitOfWork.Carts.Get(x => x.ProductId == cart.ProductId && x.Date == cart.Date,string.Empty);
             if (cartData.Count == 0)
             {
@@ -78,6 +81,7 @@ namespace Onnorokom.ShoppingCart.Membership.Services
         public void RemoveCart(Guid userId, int productId)
         {
             var carts = _shoppingCartUnitOfWork.Carts.Get(x => x.UserId == userId && x.ProductId == productId,string.Empty);
+
             var id = carts[0].Id;
             _shoppingCartUnitOfWork.Carts.Remove(id);
             _shoppingCartUnitOfWork.Save();

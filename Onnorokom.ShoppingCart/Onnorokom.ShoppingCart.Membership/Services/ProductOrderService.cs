@@ -26,27 +26,26 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             var productEntity = _shoppingCartUnitOfWork.ProductOrders.GetById(id);
             var stock = _shoppingCartUnitOfWork.Stocks.Get(x => x.ProductId == productEntity.ProductId,string.Empty);
 
-            if (productEntity != null)
+            if (productEntity != null && stock.Count>0 && stock[0].Quantity>=productEntity.Quantity)
             {
                 productEntity.OrderStatus = "Confirmed";
                 productEntity.DeliveryDate = DeliveryDate;
 
-                if(stock!=null)
-                {
-                    stock[0].Id = stock[0].Id;
-                    if (stock[0].Quantity > 0)
-                        stock[0].Quantity -= 1;
-                }
+                stock[0].Id = stock[0].Id;
+                if (stock[0].Quantity >= productEntity.Quantity)
+                    stock[0].Quantity -= productEntity.Quantity;
+
                 _shoppingCartUnitOfWork.Save();
             }
             else
-                throw new InvalidOperationException("Order is not found");
+                throw new InvalidOperationException("Order is not found or Product is not in stock");
         }
 
         public void Create(ProductOrder productOrder)
         {
             if (productOrder == null)
                 throw new InvalidOperationException("Product Order must be provided");
+
             var product = _shoppingCartUnitOfWork.Products.GetById(productOrder.ProductId);
 
             if (product == null)
@@ -78,9 +77,16 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             foreach (var item in orderData)
             {
                 var product = _shoppingCartUnitOfWork.Products.GetById(item.ProductId);
+                var stock = _shoppingCartUnitOfWork.Stocks.Get(x => x.ProductId == item.ProductId, string.Empty);
 
-                if(product!=null)
+                if (stock.Count == 0)
+                    item.Stock = 0;
+                else item.Stock = stock[0].Quantity;
+
+                if (product != null)
                     item.ProductName = product.Name;
+                else
+                    item.ProductName = "NULL";
             }
 
             if(string.IsNullOrWhiteSpace(searchText) == false)
@@ -108,8 +114,10 @@ namespace Onnorokom.ShoppingCart.Membership.Services
             {
                 var product = _shoppingCartUnitOfWork.Products.GetById(item.ProductId);
 
-                if(product!=null)
+                if (product != null)
                     item.ProductName = product.Name;
+                else
+                    item.ProductName = "NULL";
             }
 
             if (string.IsNullOrWhiteSpace(searchText) == false)

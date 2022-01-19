@@ -13,7 +13,8 @@ namespace Onnorokom.ShoppingCart.Web.Areas.Admin.Models.Orders
     {
         private IProductOrderService _productOrderService;
         private ILifetimeScope _scope;
-        [Required]
+        [Required(ErrorMessage = "Enter Delivery Date")]
+        [DataType(DataType.DateTime)]
         public DateTime DeliveryDate { get; set; }
         public int Id { get; set; }
         public OrderListModel()

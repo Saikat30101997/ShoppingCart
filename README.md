@@ -13,4 +13,5 @@
 11.You can delete your carts
 12.In Your Order you can see which product you order and see order status and total price also cancel your order if admin   
    do not confirm order. 
-13. You have to configure appsettings.json for dbconnection and cofirmemail
+13.You have to configure appsettings.json for dbconnection and cofirmemail
+14.for go to admin panel within login https://localhost:44393/admin
