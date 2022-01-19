@@ -4,7 +4,7 @@
 2. First create category
 3. go to category list then create product in this category
 4. after create you can see product in home page
-5. In product list you can add stock,edit product delete product
+5. In product list you can add stock,edit product 
 6. In Stock list you can see stocks of products you can edit stock
 7. In purchase part you can add a purchase where you buy product from.
 8. For a customer you can see which product is stock in and stock out
